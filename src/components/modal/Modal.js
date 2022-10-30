@@ -1,5 +1,5 @@
 import { Fragment } from "react";
-import { Container, Backdrop } from "../styles/Modal.styled";
+import { ModalContainer, Backdrop } from "../styles/Modal.styled";
 
 const Modal = (props) => {
   const hideModalButtonHandler = () => {
@@ -13,7 +13,7 @@ const Modal = (props) => {
   return (
     <Fragment>
       <Backdrop onClick={hideModalBackdropHandler} />
-      <Container>
+      <ModalContainer>
         <form>
           <div>
             <label htmlFor="city">City</label>
@@ -22,19 +22,8 @@ const Modal = (props) => {
           </div>
 
           <div>
-            <label htmlFor="parameter">Parameter</label>
-            <select name="parameter" id="parameter">
-              <option value="Temperature">Temperature</option>
-              <option value="Pressure">Pressure</option>
-              <option value="Humidity">Humidity</option>
-              <option value="Wind">Wind</option>
-              <option value="Visibility">Visibility</option>
-              <option value="Rain">Rain</option>
-            </select>
-          </div>
-
-          <div>
             <label htmlFor="start">Start date</label>
+            <br />
             <input
               type="date"
               id="start"
@@ -44,14 +33,15 @@ const Modal = (props) => {
           </div>
           <div>
             <label htmlFor="end">End date</label>
+            <br />
             <input type="date" id="end" defaultValue="2022-10-24" />
           </div>
           <div>
-            <button>Select</button>
+            <button>Search</button>
           </div>
         </form>
         <button onClick={hideModalButtonHandler}>&#x2715;</button>
-      </Container>
+      </ModalContainer>
     </Fragment>
   );
 };

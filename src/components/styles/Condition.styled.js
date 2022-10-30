@@ -1,12 +1,8 @@
 import styled from "styled-components";
 
-export const Container = styled.div`
+export const ConditionContainer = styled.div`
   padding-bottom: 1rem;
-  border-bottom: 1px solid #fff;
-
-  & > * {
-    text-align: left;
-  }
+  border-bottom: 1px solid var(--color-white);
 
   p {
     font-size: 5rem;
@@ -14,8 +10,8 @@ export const Container = styled.div`
   }
 
   div:last-child {
-    display: var(--display-flex);
-    align-items: var(--align-items);
+    display: flex;
+    align-items: center;
     gap: 1rem;
 
     p:last-child {

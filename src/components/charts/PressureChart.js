@@ -10,30 +10,35 @@ import {
 } from "recharts";
 import { changeFontSizeLegend } from "../../constants";
 
-const TemperatureChart = () => {
-  const tempData = [
-    { name: "12:00", temp: 290, tempMin: 220, tempMax: 300 },
-    { name: "15:00", temp: 330, tempMin: 260, tempMax: 350 },
-    { name: "18:00", temp: 360, tempMin: 240, tempMax: 320 },
-    { name: "21:00", temp: 250, tempMin: 300, tempMax: 380 },
-    { name: "00:00", temp: 210, tempMin: 320, tempMax: 390 },
+const PressureChart = () => {
+  const pressureData = [
+    { name: "12:00", pressure: 290, seaLevel: 220, groundLevel: 300 },
+    { name: "15:00", pressure: 320, seaLevel: 200, groundLevel: 350 },
+    { name: "18:00", pressure: 260, seaLevel: 170, groundLevel: 400 },
+    { name: "21:00", pressure: 300, seaLevel: 150, groundLevel: 330 },
+    { name: "00:00", pressure: 330, seaLevel: 210, groundLevel: 310 },
   ];
 
   return (
     <ResponsiveContainer width="95%">
-      <LineChart width={1000} height={500} data={tempData}>
-        <Line type="monotone" dataKey="temp" strokeWidth={3} stroke="#ff4d4d" />
+      <LineChart width={1000} height={500} data={pressureData}>
         <Line
           type="monotone"
-          dataKey="tempMin"
+          dataKey="pressure"
           strokeWidth={3}
-          stroke="#8080ff"
+          stroke="#c2d0e1"
         />
         <Line
           type="monotone"
-          dataKey="tempMax"
+          dataKey="seaLevel"
           strokeWidth={3}
-          stroke="#ff0000"
+          stroke="#e1c2d0"
+        />
+        <Line
+          type="monotone"
+          dataKey="groundLevel"
+          strokeWidth={3}
+          stroke="#d0e1c2"
         />
         <CartesianGrid stroke="var(--color-white)" strokeDasharray="5 5" />
         <XAxis
@@ -61,12 +66,12 @@ const TemperatureChart = () => {
           domain={[200, 400]}
           tickLine={{ stroke: "var(--color-white)" }}
           label={{
-            value: "T [°C]",
+            value: "Pressure [hPa]",
             angle: -90,
             position: "insideLeft",
             fill: "var(--color-white)",
             fontSize: "17px",
-            dy: 25,
+            dy: 65,
           }}
         />
         <Tooltip
@@ -79,7 +84,7 @@ const TemperatureChart = () => {
             fontSize: "15px",
           }}
           labelStyle={{ marginBottom: "10px" }}
-          formatter={(value) => `${value}°C`}
+          formatter={(value) => `${value} hPa`}
         />
         <Legend
           verticalAlign="top"
@@ -92,4 +97,4 @@ const TemperatureChart = () => {
   );
 };
 
-export default TemperatureChart;
+export default PressureChart;

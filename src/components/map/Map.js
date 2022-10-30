@@ -1,5 +1,5 @@
 import { Container } from "../styles/Map.styled";
-import MapChart from "../mapchart/MapChart";
+import MapChart from "./MapChart";
 
 const Map = () => {
   return (

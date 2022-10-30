@@ -2,8 +2,11 @@ import { createGlobalStyle } from "styled-components";
 
 const GlobalStyles = createGlobalStyle`
   :root {
-    --color-white: #fff; // define on parent element to inherit to all children?
+    // color
+    --color-white: #fff;
+    --color-dark: #333333;
     
+    // background
     --background-gradient: linear-gradient(
             to right bottom,
             #2b2c30,
@@ -19,9 +22,14 @@ const GlobalStyles = createGlobalStyle`
             #1d2831,
             #192128
     );
+
+    // border
+    --border-white: 2px solid var(--color-white);
+    --border-radius--small: 5px;
+    --border-radius--big: 15px;
+
+    --transition-all: all .2s;
     
-    --display-flex: flex;
-    --align-items: center;
   }
 
   * {
@@ -44,7 +52,7 @@ const GlobalStyles = createGlobalStyle`
     padding: 5rem 10rem;
     background-image: var(--background-gradient);
     font-family: "Roboto", sans-serif;
-    color: #fff;
+    color: var(--color-white);
   }
   
 `;

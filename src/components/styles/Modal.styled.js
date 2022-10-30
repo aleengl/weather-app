@@ -10,72 +10,19 @@ export const Backdrop = styled.div`
   z-index: 10;
 `;
 
-export const Container = styled.div`
+export const ModalContainer = styled.div`
   padding: 3rem;
+  font-size: 2rem;
   background-image: var(--background-gradient);
-  border-radius: 10px;
-  border: 2px solid var(--color-white);
+  border-radius: var(--border-radius--big);
+  border: var(--border-white);
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 9999;
 
-  form {
-    & > *:not(:last-child) {
-      margin-bottom: 2rem;
-    }
-
-    div:last-child {
-      margin-top: 5rem;
-    }
-
-    label {
-      display: inline-block;
-      font-size: 2rem;
-      margin-bottom: 1rem;
-    }
-
-    input,
-    select {
-      width: 80%;
-      padding: 1rem 2rem;
-      border: 2px solid var(--color-white);
-      border-radius: 5px;
-      outline: none;
-      color: inherit;
-      font: inherit;
-      background-color: #333333;
-      font-size: 1.7rem;
-      transition: all 0.4s;
-
-      &:focus {
-        background-color: #474747;
-      }
-    }
-
-    button {
-      position: static;
-      width: 80%;
-      background-color: #333333;
-      // margin-top: 3rem;
-      color: inherit;
-      padding: 0.8rem 0;
-      font-size: 1.8rem;
-      border: 1px solid var(--color-white);
-      border-radius: 5px;
-      cursor: pointer;
-      transition: all 0.2s;
-
-      &:hover,
-      &:active {
-        background-color: #474747;
-        color: inherit;
-      }
-    }
-  }
-
-  button {
+  & > button:last-child {
     position: absolute;
     top: 1.5rem;
     right: 1.5rem;
@@ -88,6 +35,55 @@ export const Container = styled.div`
     &:hover,
     &:active {
       color: #b3b3b3;
+    }
+  }
+
+  form {
+    & > *:not(:last-child) {
+      margin-bottom: 2rem;
+    }
+
+    label {
+      display: inline-block;
+      margin-bottom: 1rem;
+    }
+
+    input {
+      width: 100%;
+      padding: 1rem 2rem;
+      border: var(--border-white);
+      border-radius: var(--border-radius--small);
+      outline: none;
+      color: inherit;
+      font: inherit;
+      background-color: var(--color-dark);
+      transition: var(--transition-all);
+
+      &:focus {
+        background-color: #474747;
+      }
+    }
+
+    button {
+      background-color: var(--color-dark);
+      color: inherit;
+      font: inherit;
+      padding: 1rem 6rem;
+      border: var(--border-white);
+      border-radius: var(--border-radius--small);
+      cursor: pointer;
+      transition: var(--transition-all);
+
+      &:hover,
+      &:active {
+        background-color: #474747;
+        color: inherit;
+      }
+    }
+
+    div:last-child {
+      margin-top: 6rem;
+      text-align: center;
     }
   }
 `;

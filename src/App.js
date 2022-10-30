@@ -1,8 +1,8 @@
 // import { useState, useEffect } from "react";
 import GlobalStyles from "./components/styles/Global";
-import Container from "./components/styles/Container.styled";
+import AppContainer from "./components/styles/AppContainer.styled";
 import Grid from "./components/styles/Grid.styled";
-import CurrentWeather from "./components/currentWeather/CurrentWeather";
+import CurrentLocation from "./components/currentLocation/CurrentLocation";
 import Measurement from "./components/measurement/Measurement";
 import Forecast from "./components/forecast/Forecast";
 import Map from "./components/map/Map";
@@ -32,14 +32,14 @@ function App() {
   return (
     <>
       <GlobalStyles />
-      <Container>
+      <AppContainer>
         <Grid>
-          <CurrentWeather />
+          <CurrentLocation />
           <Measurement />
           <Forecast />
           <Map />
         </Grid>
-      </Container>
+      </AppContainer>
     </>
   );
 }

@@ -1,20 +1,11 @@
 import sprite_symbols from "../../img/sprite_symbols.svg";
-import { Container } from "../styles/Condition.styled";
+import { ConditionContainer } from "../styles/Condition.styled";
+import { style_cloudRain, style_cloudSun } from "../../constants";
 import Icon from "../Icon/Icon";
-
-const style_cloudSun = {
-  height: "10rem",
-  width: "10rem",
-};
-
-const style_cloudRain = {
-  height: "3.5rem",
-  width: "3.5rem",
-};
 
 const Condition = () => {
   return (
-    <Container>
+    <ConditionContainer>
       <div>
         <Icon
           file={sprite_symbols}
@@ -33,7 +24,7 @@ const Condition = () => {
         </div>
         <p>Rainy Storm Clouds</p>
       </div>
-    </Container>
+    </ConditionContainer>
   );
 };
 

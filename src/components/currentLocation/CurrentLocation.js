@@ -1,10 +1,10 @@
 import { useState } from "react";
-import Container from "../styles/CurrentWeather.styled";
+import LocationContainer from "../styles/CurrentLocation.styled";
 import Condition from "./Condition";
 import Station from "./Station";
 import Modal from "../modal/Modal";
 
-const CurrentWeather = () => {
+const CurrentLocation = () => {
   const [showModal, setShowModal] = useState(false);
 
   const showModalHandler = () => {
@@ -12,18 +12,18 @@ const CurrentWeather = () => {
   };
 
   return (
-    <Container>
+    <LocationContainer>
       {showModal && <Modal show={setShowModal} />}
       <div>
         <p>Current Location</p>
         <Condition />
         <Station />
         <button type="button" onClick={showModalHandler}>
-          Select a new Location
+          Choose a new Location
         </button>
       </div>
-    </Container>
+    </LocationContainer>
   );
 };
 
-export default CurrentWeather;
+export default CurrentLocation;

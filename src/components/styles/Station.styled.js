@@ -4,7 +4,7 @@ export const Container = styled.div`
   margin-top: 1rem;
 
   & > * {
-    display: var(--display-flex);
+    display: flex;
     align-items: center;
     gap: 1rem;
   }
@@ -15,7 +15,7 @@ export const Container = styled.div`
 
   div:first-child span,
   div:last-child p {
-    font-size: 1.6rem;
+    font-size: 1.8rem;
     color: var(--color-white);
   }
 
