@@ -10,7 +10,7 @@ const Measurement = () => {
   return (
     <MeasureContainer>
       <ChartContainer>
-        <RainChart />
+        <HumidityChart />
       </ChartContainer>
       <div>
         <label htmlFor="parameter">Parameters</label>

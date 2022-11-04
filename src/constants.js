@@ -1,10 +1,16 @@
+import { CartesianGrid, XAxis, YAxis, Tooltip, Legend } from "recharts";
+
 ///////////////////////////////////
 //// API
 //////////////////////////////////
 
-export const API_URL =
-  "https://api.openweathermap.org/geo/1.0/direct?q=London&limit=5&appid=";
 export const API_KEY = "676cc917d4638f9dae16c8d712dea6be";
+
+export const API_URL_FORECAST =
+  "https://api.openweathermap.org/data/2.5/forecast?lat=";
+
+export const API_URL_LOCATION =
+  "http://api.openweathermap.org/geo/1.0/direct?q=";
 
 ///////////////////////////////////
 //// DATES
@@ -61,15 +67,88 @@ export const style_cloudRain = {
 //// CHARTS
 //////////////////////////////////
 
-export const changeFontSizeLegend = (value) => {
-  return <span style={{ fontSize: "17px" }}>{value}</span>;
-};
+export const cartesianGrid = (
+  <CartesianGrid stroke="var(--color-white)" strokeDasharray="5 5" />
+);
 
-// TODO: components used in more Charts should be defined here and then exported!
+export const changeFontSizeLegend = (value) => (
+  <span style={{ fontSize: "17px" }}>{value}</span>
+);
+
+export const xAxis = (
+  <XAxis
+    dataKey="name"
+    tick={{
+      fill: "var(--color-white)",
+      fontSize: "15px",
+      fontWeight: 500,
+    }}
+    tickLine={{ stroke: "var(--color-white)" }}
+    height={55}
+    label={{
+      value: "t [3h]",
+      position: "insideBottom",
+      fill: "var(--color-white)",
+      fontSize: "17px",
+    }}
+  />
+);
+
+export const axis = (parameter, shiftY) => (
+  <YAxis
+    tick={{
+      fill: "var(--color-white)",
+      fontSize: "15px",
+      fontWeight: 500,
+    }}
+    tickLine={{ stroke: "var(--color-white)" }}
+    label={{
+      value: `${parameter}`,
+      angle: -90,
+      position: "insideLeft",
+      fill: "var(--color-white)",
+      fontSize: "17px",
+      dy: shiftY,
+    }}
+  />
+);
+
+export const tip = (unit) => (
+  <Tooltip
+    wrapperStyle={{
+      color: "#000",
+      outline: "none",
+      border: "2px solid #000",
+    }}
+    contentStyle={{
+      fontSize: "15px",
+    }}
+    labelStyle={{ marginBottom: "10px" }}
+    formatter={(value) => `${value}${unit}`}
+  />
+);
+
+export const legend = (
+  <Legend
+    verticalAlign="top"
+    height={36}
+    iconSize={25}
+    formatter={changeFontSizeLegend}
+  />
+);
 
 ///////////////////////////////////
 //// MAP CHART
 //////////////////////////////////
 
-export const geoUrl =
-  "https://raw.githubusercontent.com/deldersveld/topojson/master/countries/italy/italy-regions.json";
+export const centeredMap = [46.89, 11.43]; // coordinates of Sterzing
+
+export const PopupContent = () => {
+  return (
+    <div>
+      <p>Name of the Station</p>
+      <p>Longitude</p>
+      <p>Latitude</p>
+    </div>
+  );
+};

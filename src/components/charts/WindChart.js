@@ -1,14 +1,5 @@
-import {
-  ResponsiveContainer,
-  LineChart,
-  Line,
-  CartesianGrid,
-  XAxis,
-  YAxis,
-  Tooltip,
-  Legend,
-} from "recharts";
-import { changeFontSizeLegend } from "../../constants";
+import { ResponsiveContainer, LineChart, Line } from "recharts";
+import { cartesianGrid, xAxis, axis, tip, legend } from "../../constants";
 
 const WindChart = () => {
   const windData = [
@@ -18,6 +9,11 @@ const WindChart = () => {
     { name: "21:00", speed: 60, gust: 110, deg: 150 },
     { name: "00:00", speed: 90, gust: 130, deg: 85 },
   ];
+
+  const yAxis_speed = axis("[km/h]", 55);
+  const yAxis_direction = axis("[deg]", 55);
+  const tooltip_speed = tip("km/h");
+  const tooltip_direction = tip("°");
 
   return (
     <ResponsiveContainer width="95%">
@@ -35,57 +31,11 @@ const WindChart = () => {
             stroke="#94a6a8"
             strokeWidth={3}
           />
-          <CartesianGrid stroke="var(--color-white)" strokeDasharray="5 5" />
-          <XAxis
-            dataKey="name"
-            tick={{
-              fill: "var(--color-white)",
-              fontSize: "15px",
-              fontWeight: 500,
-            }}
-            tickLine={{ stroke: "var(--color-white)" }}
-            height={50}
-            label={{
-              value: "t [3h]",
-              position: "insideBottom",
-              fill: "var(--color-white)",
-              fontSize: "17px",
-            }}
-          />
-          <YAxis
-            tick={{
-              fill: "var(--color-white)",
-              fontSize: "15px",
-              fontWeight: 500,
-            }}
-            tickLine={{ stroke: "var(--color-white)" }}
-            label={{
-              value: "speed [km/h]",
-              angle: -90,
-              position: "insideLeft",
-              fill: "var(--color-white)",
-              fontSize: "17px",
-              dy: 55,
-            }}
-          />
-          <Tooltip
-            wrapperStyle={{
-              color: "#000",
-              outline: "none",
-              border: "2px solid black",
-            }}
-            contentStyle={{
-              fontSize: "15px",
-            }}
-            labelStyle={{ marginBottom: "10px" }}
-            formatter={(value) => `${value} km/h`}
-          />
-          <Legend
-            verticalAlign="top"
-            height={36}
-            iconSize={25}
-            formatter={changeFontSizeLegend}
-          />
+          {cartesianGrid}
+          {xAxis}
+          {yAxis_speed}
+          {tooltip_speed}
+          {legend}
         </LineChart>
         <LineChart width={900} height={200} data={windData} syncId="1">
           <Line
@@ -94,57 +44,11 @@ const WindChart = () => {
             stroke="#cccccc"
             strokeWidth={3}
           />
-          <CartesianGrid stroke="var(--color-white)" strokeDasharray="5 5" />
-          <XAxis
-            dataKey="name"
-            tick={{
-              fill: "var(--color-white)",
-              fontSize: "15px",
-              fontWeight: 500,
-            }}
-            tickLine={{ stroke: "var(--color-white)" }}
-            height={50}
-            label={{
-              value: "t [3h]",
-              position: "insideBottom",
-              fill: "var(--color-white)",
-              fontSize: "17px",
-            }}
-          />
-          <YAxis
-            tick={{
-              fill: "var(--color-white)",
-              fontSize: "15px",
-              fontWeight: 500,
-            }}
-            tickLine={{ stroke: "var(--color-white)" }}
-            label={{
-              value: "direction [deg]",
-              angle: -90,
-              position: "insideLeft",
-              fill: "var(--color-white)",
-              fontSize: "17px",
-              dy: 55,
-            }}
-          />
-          <Tooltip
-            wrapperStyle={{
-              color: "#000",
-              outline: "none",
-              border: "2px solid #000",
-            }}
-            contentStyle={{
-              fontSize: "15px",
-            }}
-            labelStyle={{ marginBottom: "10px" }}
-            formatter={(value) => `${value}°`}
-          />
-          <Legend
-            verticalAlign="top"
-            height={36}
-            iconSize={25}
-            formatter={changeFontSizeLegend}
-          />
+          {cartesianGrid}
+          {xAxis}
+          {yAxis_direction}
+          {tooltip_direction}
+          {legend}
         </LineChart>
       </div>
     </ResponsiveContainer>

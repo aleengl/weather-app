@@ -1,15 +1,5 @@
-import {
-  ResponsiveContainer,
-  BarChart,
-  CartesianGrid,
-  XAxis,
-  YAxis,
-  Bar,
-  LabelList,
-  Tooltip,
-  Legend,
-} from "recharts";
-import { changeFontSizeLegend } from "../../constants";
+import { ResponsiveContainer, BarChart, Bar, LabelList } from "recharts";
+import { cartesianGrid, xAxis, axis, tip, legend } from "../../constants";
 
 const RainChart = () => {
   const rainData = [
@@ -20,61 +10,17 @@ const RainChart = () => {
     { name: "00:00", rainSum: 0 },
   ];
 
+  const yAxis = axis("mm", 20);
+  const tooltip = tip("mm");
+
   return (
     <ResponsiveContainer width="95%">
       <BarChart height={1000} width={500} data={rainData}>
-        <CartesianGrid stroke="var(--color-white)" strokeDasharray="5 5" />
-        <XAxis
-          dataKey="name"
-          tick={{
-            fill: "var(--color-white)",
-            fontSize: "15px",
-            fontWeight: 500,
-          }}
-          tickLine={{ stroke: "var(--color-white)" }}
-          height={50}
-          label={{
-            value: "t [3h]",
-            position: "insideBottom",
-            fill: "var(--color-white)",
-            fontSize: "17px",
-          }}
-        />
-        <YAxis
-          tick={{
-            fill: "var(--color-white)",
-            fontSize: "15px",
-            fontWeight: 500,
-          }}
-          tickLine={{ stroke: "var(--color-white)" }}
-          label={{
-            value: "mm",
-            angle: -90,
-            position: "insideLeft",
-            fill: "var(--color-white)",
-            fontSize: "17px",
-            dy: 20,
-          }}
-        />
-        <Tooltip
-          wrapperStyle={{
-            color: "#000",
-            outline: "none",
-            border: "2px solid #000",
-          }}
-          contentStyle={{
-            fontSize: "15px",
-          }}
-          labelStyle={{ marginBottom: "10px" }}
-          formatter={(value) => `${value} mm`}
-          cursor={{ fill: "#6172a1" }}
-        />
-        <Legend
-          verticalAlign="top"
-          height={36}
-          iconSize={25}
-          formatter={changeFontSizeLegend}
-        />
+        {cartesianGrid}
+        {xAxis}
+        {yAxis}
+        {tooltip}
+        {legend}
         <Bar dataKey="rainSum" fill="#394f89">
           <LabelList
             dataKey="rainSum"

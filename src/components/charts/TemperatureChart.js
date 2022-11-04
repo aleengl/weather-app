@@ -1,14 +1,5 @@
-import {
-  ResponsiveContainer,
-  LineChart,
-  Line,
-  CartesianGrid,
-  XAxis,
-  YAxis,
-  Tooltip,
-  Legend,
-} from "recharts";
-import { changeFontSizeLegend } from "../../constants";
+import { ResponsiveContainer, LineChart, Line } from "recharts";
+import { cartesianGrid, xAxis, axis, tip, legend } from "../../constants";
 
 const TemperatureChart = () => {
   const tempData = [
@@ -18,6 +9,9 @@ const TemperatureChart = () => {
     { name: "21:00", temp: 250, tempMin: 300, tempMax: 380 },
     { name: "00:00", temp: 210, tempMin: 320, tempMax: 390 },
   ];
+
+  const yAxis = axis("°C", 20);
+  const tooltip = tip("°C");
 
   return (
     <ResponsiveContainer width="95%">
@@ -35,58 +29,11 @@ const TemperatureChart = () => {
           strokeWidth={3}
           stroke="#ff0000"
         />
-        <CartesianGrid stroke="var(--color-white)" strokeDasharray="5 5" />
-        <XAxis
-          dataKey="name"
-          tick={{
-            fill: "var(--color-white)",
-            fontSize: "15px",
-            fontWeight: 500,
-          }}
-          tickLine={{ stroke: "var(--color-white)" }}
-          height={55}
-          label={{
-            value: "t [3h]",
-            position: "insideBottom",
-            fill: "var(--color-white)",
-            fontSize: "17px",
-          }}
-        />
-        <YAxis
-          tick={{
-            fill: "var(--color-white)",
-            fontSize: "15px",
-            fontWeight: 500,
-          }}
-          domain={[200, 400]}
-          tickLine={{ stroke: "var(--color-white)" }}
-          label={{
-            value: "T [°C]",
-            angle: -90,
-            position: "insideLeft",
-            fill: "var(--color-white)",
-            fontSize: "17px",
-            dy: 25,
-          }}
-        />
-        <Tooltip
-          wrapperStyle={{
-            color: "#000",
-            outline: "none",
-            border: "2px solid #000",
-          }}
-          contentStyle={{
-            fontSize: "15px",
-          }}
-          labelStyle={{ marginBottom: "10px" }}
-          formatter={(value) => `${value}°C`}
-        />
-        <Legend
-          verticalAlign="top"
-          height={36}
-          iconSize={25}
-          formatter={changeFontSizeLegend}
-        />
+        {cartesianGrid}
+        {xAxis}
+        {yAxis}
+        {tooltip}
+        {legend}
       </LineChart>
     </ResponsiveContainer>
   );

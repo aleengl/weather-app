@@ -1,14 +1,5 @@
-import {
-  ResponsiveContainer,
-  AreaChart,
-  CartesianGrid,
-  XAxis,
-  YAxis,
-  Tooltip,
-  Legend,
-  Area,
-} from "recharts";
-import { changeFontSizeLegend } from "../../constants";
+import { ResponsiveContainer, AreaChart, Area } from "recharts";
+import { cartesianGrid, xAxis, axis, tip, legend } from "../../constants";
 
 const HumidityChart = () => {
   const humidityData = [
@@ -19,6 +10,9 @@ const HumidityChart = () => {
     { name: "00:00", humidity: 20 },
   ];
 
+  const yAxis = axis("Humidity [%]", 55);
+  const tooltip = tip("%");
+
   return (
     <ResponsiveContainer width="95%">
       <AreaChart height={1000} width={500} data={humidityData}>
@@ -28,57 +22,11 @@ const HumidityChart = () => {
             <stop offset="95%" stopColor="#8884d8" stopOpacity={0} />
           </linearGradient>
         </defs>
-        <CartesianGrid stroke="var(--color-white)" strokeDasharray="5 5" />
-        <XAxis
-          dataKey="name"
-          tick={{
-            fill: "var(--color-white)",
-            fontSize: "15px",
-            fontWeight: 500,
-          }}
-          tickLine={{ stroke: "var(--color-white)" }}
-          height={50}
-          label={{
-            value: "t [3h]",
-            position: "insideBottom",
-            fill: "var(--color-white)",
-            fontSize: "17px",
-          }}
-        />
-        <YAxis
-          tick={{
-            fill: "var(--color-white)",
-            fontSize: "15px",
-            fontWeight: 500,
-          }}
-          tickLine={{ stroke: "var(--color-white)" }}
-          label={{
-            value: "Humidity [%]",
-            angle: -90,
-            position: "insideLeft",
-            fill: "var(--color-white)",
-            fontSize: "17px",
-            dy: 55,
-          }}
-        />
-        <Tooltip
-          wrapperStyle={{
-            color: "#000",
-            outline: "none",
-            border: "2px solid #000",
-          }}
-          contentStyle={{
-            fontSize: "15px",
-          }}
-          labelStyle={{ marginBottom: "10px" }}
-          formatter={(value) => `${value}%`}
-        />
-        <Legend
-          verticalAlign="top"
-          height={36}
-          iconSize={25}
-          formatter={changeFontSizeLegend}
-        />
+        {cartesianGrid}
+        {xAxis}
+        {yAxis}
+        {tooltip}
+        {legend}
         <Area
           type="monotone"
           dataKey="humidity"
