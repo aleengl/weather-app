@@ -1,7 +1,13 @@
+import { useContext } from "react";
 import { ResponsiveContainer, AreaChart, Area } from "recharts";
 import { cartesianGrid, xAxis, axis, tip, legend } from "../../constants";
+import WeatherContext from "../../store/weather-context";
 
 const HumidityChart = () => {
+  const weather = useContext(WeatherContext);
+
+  console.log(weather);
+
   const humidityData = [
     { name: "12:00", humidity: 30 },
     { name: "15:00", humidity: 50 },

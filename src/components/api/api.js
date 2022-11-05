@@ -1,10 +1,10 @@
 import { API_KEY, API_URL_FORECAST, API_URL_LOCATION } from "../../constants";
 
 // get weather data
-export const getWeatherData = async (lat, lon) => {
+export const getWeatherData = async (lat, lon, updateWeather) => {
   try {
     const response = await fetch(
-      `${API_URL_FORECAST}{${lat}}&lon={${lon}}&appid={${API_KEY}}`
+      `${API_URL_FORECAST}${lat}&lon=${lon}&appid=${API_KEY}`
     );
 
     if (!response.ok) {
@@ -12,8 +12,7 @@ export const getWeatherData = async (lat, lon) => {
     }
 
     const data = await response.json();
-
-    return data;
+    updateWeather(data);
   } catch (error) {}
 };
 

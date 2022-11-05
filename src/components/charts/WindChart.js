@@ -1,7 +1,13 @@
+import { useContext } from "react";
 import { ResponsiveContainer, LineChart, Line } from "recharts";
 import { cartesianGrid, xAxis, axis, tip, legend } from "../../constants";
+import WeatherContext from "../../store/weather-context";
 
 const WindChart = () => {
+  const weather = useContext(WeatherContext);
+
+  console.log(weather);
+
   const windData = [
     { name: "12:00", speed: 10, gust: 35, deg: 10 },
     { name: "15:00", speed: 30, gust: 55, deg: 330 },

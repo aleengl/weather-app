@@ -1,7 +1,13 @@
+import { useContext } from "react";
 import { ResponsiveContainer, LineChart, Line } from "recharts";
 import { cartesianGrid, xAxis, axis, tip, legend } from "../../constants";
+import WeatherContext from "../../store/weather-context";
 
 const PressureChart = () => {
+  const weather = useContext(WeatherContext);
+
+  console.log(weather);
+
   const pressureData = [
     { name: "12:00", pressure: 290, seaLevel: 220, groundLevel: 300 },
     { name: "15:00", pressure: 320, seaLevel: 200, groundLevel: 350 },
