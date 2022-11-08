@@ -1,13 +1,7 @@
-import { useContext } from "react";
 import { ResponsiveContainer, LineChart, Line } from "recharts";
 import { cartesianGrid, xAxis, axis, tip, legend } from "../../constants";
-import WeatherContext from "../../store/weather-context";
 
 const TemperatureChart = () => {
-  const weather = useContext(WeatherContext);
-
-  console.log(weather);
-
   const tempData = [
     { name: "12:00", temp: 290, tempMin: 220, tempMax: 300 },
     { name: "15:00", temp: 330, tempMin: 260, tempMax: 350 },

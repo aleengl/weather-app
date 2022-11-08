@@ -5,10 +5,11 @@ import {
   style_locationPin,
   style_calendar,
   currentDate,
-  currentTime,
+  hours,
+  minutes,
 } from "../../constants";
 
-const Station = () => {
+const Station = (props) => {
   return (
     <Container>
       <div>
@@ -17,14 +18,20 @@ const Station = () => {
           icon="icon-location-pin"
           style={style_locationPin}
         />
-        <span>Florida, US</span>
+        <span>{props.city}</span>
       </div>
       <div>
         <Icon file={sprite_icons} icon="icon-calendar" style={style_calendar} />
-        <p>
-          {currentDate}
-          <span>{currentTime}</span>
-        </p>
+        {props.timezone && (
+          <p>
+            {currentDate}
+            <span>
+              {`${(hours + props.timezone / 3600)
+                .toString()
+                .padStart(2, "0")}:${minutes}`}
+            </span>
+          </p>
+        )}
       </div>
     </Container>
   );

@@ -1,10 +1,11 @@
 import L from "leaflet";
-import mapPin from "../../img/postal-code-prefix.svg";
 
 const LocationIcon = new L.Icon({
-  iconUrl: mapPin,
+  iconUrl:
+    "https://api.geoapify.com/v1/icon/?type=material&color=red&size=small&icon=cloud&scaleFactor=2&apiKey=d6e692628e8d4cf29f0dadc1ca6df3e8",
+  iconSize: [35, 50],
   popupAnchor: [0, -45], // position of popup
-  iconAnchor: [25, 45],
+  iconAnchor: [15, 45],
 });
 
 export default LocationIcon;

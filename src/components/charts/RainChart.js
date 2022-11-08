@@ -1,13 +1,7 @@
-import { useContext } from "react";
 import { ResponsiveContainer, BarChart, Bar, LabelList } from "recharts";
 import { cartesianGrid, xAxis, axis, tip, legend } from "../../constants";
-import WeatherContext from "../../store/weather-context";
 
 const RainChart = () => {
-  const weather = useContext(WeatherContext);
-
-  console.log(weather);
-
   const rainData = [
     { name: "12:00", rainSum: 30 },
     { name: "15:00", rainSum: 50 },

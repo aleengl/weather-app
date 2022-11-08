@@ -18,13 +18,12 @@ export const API_URL_LOCATION =
 
 // current Date
 const date = new Date();
-const day = `${date.getDate()}`.padStart(2, "0");
-const month = `${date.getMonth() + 1}`.padStart(2, "0");
-const hours = `${date.getHours()}`.padStart(2, "0");
-const minutes = `${date.getMinutes()}`.padStart(2, "0");
+const day = `${date.getUTCDate()}`.padStart(2, "0");
+const month = `${date.getUTCMonth() + 1}`.padStart(2, "0");
 
-export const currentDate = `${day}.${month}.${date.getFullYear()} `;
-export const currentTime = `${hours}:${minutes}`;
+export const currentDate = `${day}.${month}.${date.getUTCFullYear()} `;
+export const hours = date.getUTCHours();
+export const minutes = `${date.getUTCMinutes()}`.padStart(2, "0");
 
 ///////////////////////////////////
 //// STYLING
@@ -142,6 +141,11 @@ export const legend = (
 //////////////////////////////////
 
 export const centeredMap = [46.89, 11.43]; // coordinates of Sterzing
+// Bolzano as default if Geolocation API not available or fetching user position failed
+export const defaultLocation = {
+  lat: 46.3,
+  long: 11.21,
+};
 
 export const PopupContent = () => {
   return (

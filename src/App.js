@@ -5,58 +5,103 @@ import Grid from "./components/styles/Grid.styled";
 import CurrentLocation from "./components/currentLocation/CurrentLocation";
 import Measurement from "./components/measurement/Measurement";
 import Map from "./components/map/Map";
-import { getWeatherData } from "./components/api/api";
-import WeatherContext from "./store/weather-context";
+import { getWeatherData, getCoordinates } from "./components/api/api";
+import { defaultLocation } from "./constants";
 
-function App() {
-  const [position, getPosition] = useState({
-    lat: null,
-    long: null,
-  });
+const initialPos = {
+  lat: null,
+  lon: null,
+};
+
+const currentForecast = (data) => {
+  if (!data) {
+    return {
+      icon: "",
+      temp: null,
+      description: "",
+      cityName: "",
+      timezone: "",
+    };
+  }
+
+  const { icon } = data.list[0].weather[0];
+  const { temp } = data.list[0].main;
+  const { description } = data.list[0].weather[0];
+  const { name: cityName, timezone } = data.city;
+
+  return {
+    icon,
+    temp,
+    description,
+    cityName,
+    timezone,
+  };
+};
+
+const futureForecast = (data) => {
+  if (!data) {
+    return [];
+  }
+
+  const timestamps = data.list.filter((_, index) => index < 5);
+
+  return timestamps;
+};
+
+const App = () => {
+  const [defaultPosition, setDefaultPosition] = useState(initialPos);
+  const [position, getPosition] = useState(initialPos);
   const [weather, getWeather] = useState();
 
-  console.log(weather);
-
-  const success = (position) => {
-    const { latitude, longitude } = position.coords;
-    getPosition({
-      lat: latitude,
-      long: longitude,
-    });
-    getWeatherData(latitude, longitude, getWeather);
-  };
-
-  const error = (error) => {
-    alert(`Error: ${error.message}`);
-  };
-
   useEffect(() => {
+    // test if geolocation is available
     if ("geolocation" in navigator) {
-      // test if geolocation is available
-      navigator.geolocation.getCurrentPosition(success, error);
+      // available
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const { latitude, longitude } = position.coords;
+          getPosition({
+            lat: latitude,
+            lon: longitude,
+          });
+          getWeatherData(latitude, longitude, getWeather);
+        },
+        () => {
+          getCoordinates("Tokio", setDefaultPosition);
+          console.log("Geolocation denied");
+        }
+      );
     } else {
-      // may use Bolzano as a default city to show
+      // not available
       console.log("Geolocation not available!");
+      // set Bolzano as default Location
+      getWeatherData(defaultLocation.lat, defaultLocation.long, getWeather);
+      getPosition(defaultLocation);
     }
   }, []);
 
+  useEffect(() => {
+    if (defaultPosition.lat && defaultPosition.lon) {
+      getWeatherData(defaultPosition.lat, defaultPosition.lon, getWeather);
+    }
+  }, [defaultPosition.lat, defaultPosition.lon]);
+
+  const currentTimeStamp = currentForecast(weather);
+  const timestamps = futureForecast(weather);
+
   return (
     <>
-      <WeatherContext.Provider value={weather}>
-        <GlobalStyles />
-        <AppContainer>
-          {position.lat && <p>{position.lat}</p>}
-          {position.long && <p>{position.long}</p>}
-          <Grid>
-            <CurrentLocation />
-            <Measurement />
-            <Map />
-          </Grid>
-        </AppContainer>
-      </WeatherContext.Provider>
+      <GlobalStyles />
+      <AppContainer>
+        <Grid>
+          <CurrentLocation data={currentTimeStamp} />
+          <Measurement data={timestamps} />
+          <Map />
+        </Grid>
+      </AppContainer>
     </>
   );
-}
+};
 
 export default App;
 

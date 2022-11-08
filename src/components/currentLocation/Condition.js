@@ -1,29 +1,27 @@
 import sprite_symbols from "../../img/sprite_symbols.svg";
 import { ConditionContainer } from "../styles/Condition.styled";
-import { style_cloudRain, style_cloudSun } from "../../constants";
+import { style_cloudSun } from "../../constants";
 import Icon from "../Icon/Icon";
 
-const Condition = () => {
+const Condition = (props) => {
   return (
     <ConditionContainer>
       <div>
-        <Icon
-          file={sprite_symbols}
-          icon="icon-cloud-sun"
-          style={style_cloudSun}
-        />
-      </div>
-      <p>28°C</p>
-      <div>
-        <div>
+        {props.icon ? (
+          <img
+            src={`http://openweathermap.org/img/wn/${props.icon}@2x.png`}
+            alt="icon of the weather condition"
+          />
+        ) : (
           <Icon
             file={sprite_symbols}
-            icon="icon-cloud-rain"
-            style={style_cloudRain}
+            icon="icon-cloud-sun"
+            style={style_cloudSun}
           />
-        </div>
-        <p>Rainy Storm Clouds</p>
+        )}
       </div>
+      <p>{props.temperature ? `${props.temperature.toFixed(1)}°C` : ""}</p>
+      <span>{props.description ? props.description : ""}</span>
     </ConditionContainer>
   );
 };
