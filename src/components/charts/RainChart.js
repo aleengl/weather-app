@@ -1,29 +1,23 @@
 import { ResponsiveContainer, BarChart, Bar, LabelList } from "recharts";
 import { cartesianGrid, xAxis, axis, tip, legend } from "../../constants";
 
-const RainChart = () => {
-  const rainData = [
-    { name: "12:00", rainSum: 30 },
-    { name: "15:00", rainSum: 50 },
-    { name: "18:00", rainSum: 70 },
-    { name: "21:00", rainSum: 10 },
-    { name: "00:00", rainSum: 0 },
-  ];
+const RainChart = (props) => {
+  console.log(props.data);
 
   const yAxis = axis("mm", 20);
   const tooltip = tip("mm");
 
   return (
     <ResponsiveContainer width="95%">
-      <BarChart height={1000} width={500} data={rainData}>
+      <BarChart height={1000} width={500} data={props.data}>
         {cartesianGrid}
         {xAxis}
         {yAxis}
         {tooltip}
         {legend}
-        <Bar dataKey="rainSum" fill="#394f89">
+        <Bar dataKey="rain" fill="#394f89">
           <LabelList
-            dataKey="rainSum"
+            dataKey={props.data.rain}
             position="top"
             style={{ fill: "var(--color-white)", fontSize: 17 }}
           />

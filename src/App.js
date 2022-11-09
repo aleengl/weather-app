@@ -6,12 +6,6 @@ import CurrentLocation from "./components/currentLocation/CurrentLocation";
 import Measurement from "./components/measurement/Measurement";
 import Map from "./components/map/Map";
 import { getWeatherData, getCoordinates } from "./components/api/api";
-import { defaultLocation } from "./constants";
-
-const initialPos = {
-  lat: null,
-  lon: null,
-};
 
 const currentForecast = (data) => {
   if (!data) {
@@ -40,17 +34,23 @@ const currentForecast = (data) => {
 
 const futureForecast = (data) => {
   if (!data) {
-    return [];
+    return {
+      timestamps: [],
+      timezone: null,
+    };
   }
 
   const timestamps = data.list.filter((_, index) => index < 5);
+  const { timezone } = data.city;
 
-  return timestamps;
+  return { timestamps, timezone };
 };
 
 const App = () => {
-  const [defaultPosition, setDefaultPosition] = useState(initialPos);
-  const [position, getPosition] = useState(initialPos);
+  const [position, getPosition] = useState({
+    lat: null,
+    lon: null,
+  });
   const [weather, getWeather] = useState();
 
   useEffect(() => {
@@ -59,32 +59,31 @@ const App = () => {
       // available
       navigator.geolocation.getCurrentPosition(
         (position) => {
-          const { latitude, longitude } = position.coords;
+          const { latitude: lat, longitude: lon } = position.coords;
           getPosition({
-            lat: latitude,
-            lon: longitude,
+            lat: lat,
+            lon: lon,
           });
-          getWeatherData(latitude, longitude, getWeather);
         },
         () => {
-          getCoordinates("Tokio", setDefaultPosition);
+          getCoordinates("Bolzano", getPosition);
           console.log("Geolocation denied");
-        }
+        },
+        { enableHighAccuracy: true }
       );
     } else {
       // not available
       console.log("Geolocation not available!");
       // set Bolzano as default Location
-      getWeatherData(defaultLocation.lat, defaultLocation.long, getWeather);
-      getPosition(defaultLocation);
+      getCoordinates("Bolzano", getPosition);
     }
   }, []);
 
   useEffect(() => {
-    if (defaultPosition.lat && defaultPosition.lon) {
-      getWeatherData(defaultPosition.lat, defaultPosition.lon, getWeather);
+    if (position.lat && position.lon) {
+      getWeatherData(position.lat, position.lon, getWeather);
     }
-  }, [defaultPosition.lat, defaultPosition.lon]);
+  }, [position.lat, position.lon]);
 
   const currentTimeStamp = currentForecast(weather);
   const timestamps = futureForecast(weather);
@@ -96,7 +95,7 @@ const App = () => {
         <Grid>
           <CurrentLocation data={currentTimeStamp} />
           <Measurement data={timestamps} />
-          <Map />
+          <Map position={position} />
         </Grid>
       </AppContainer>
     </>
@@ -104,5 +103,3 @@ const App = () => {
 };
 
 export default App;
-
-// TODO: only pass the data needed to the Chart Components

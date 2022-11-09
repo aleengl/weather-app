@@ -2,24 +2,14 @@ import { ResponsiveContainer, AreaChart, Area } from "recharts";
 import { cartesianGrid, xAxis, axis, tip, legend } from "../../constants";
 
 const HumidityChart = (props) => {
-  // 1) need timestamps for xAxis
-  // 2) humidity, temperature,....
-  const humidityData = [
-    { name: "12:00", humidity: 30 },
-    { name: "15:00", humidity: 50 },
-    { name: "18:00", humidity: 70 },
-    { name: "21:00", humidity: 10 },
-    { name: "00:00", humidity: 20 },
-  ];
-
-  console.log(props.test);
+  console.log(props.data);
 
   const yAxis = axis("Humidity [%]", 55);
   const tooltip = tip("%");
 
   return (
     <ResponsiveContainer width="95%">
-      <AreaChart height={1000} width={500} data={humidityData}>
+      <AreaChart height={1000} width={500} data={props.data}>
         <defs>
           <linearGradient>
             <stop offset="5%" stopColor="#8884d8" stopOpacity={0.8} />

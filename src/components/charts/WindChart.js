@@ -1,14 +1,8 @@
 import { ResponsiveContainer, LineChart, Line } from "recharts";
 import { cartesianGrid, xAxis, axis, tip, legend } from "../../constants";
 
-const WindChart = () => {
-  const windData = [
-    { name: "12:00", speed: 10, gust: 35, deg: 10 },
-    { name: "15:00", speed: 30, gust: 55, deg: 330 },
-    { name: "18:00", speed: 5, gust: 8, deg: 214 },
-    { name: "21:00", speed: 60, gust: 110, deg: 150 },
-    { name: "00:00", speed: 90, gust: 130, deg: 85 },
-  ];
+const WindChart = (props) => {
+  console.log(props.data);
 
   const yAxis_speed = axis("[km/h]", 55);
   const yAxis_direction = axis("[deg]", 55);
@@ -18,7 +12,7 @@ const WindChart = () => {
   return (
     <ResponsiveContainer width="95%">
       <div>
-        <LineChart width={900} height={200} data={windData} syncId="1">
+        <LineChart width={900} height={200} data={props.data} syncId="1">
           <Line
             type="monotone"
             dataKey="speed"
@@ -37,7 +31,7 @@ const WindChart = () => {
           {tooltip_speed}
           {legend}
         </LineChart>
-        <LineChart width={900} height={200} data={windData} syncId="1">
+        <LineChart width={900} height={200} data={props.data} syncId="1">
           <Line
             type="monotone"
             dataKey="deg"

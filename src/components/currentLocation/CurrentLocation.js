@@ -11,8 +11,6 @@ const CurrentLocation = (props) => {
     setShowModal(true);
   };
 
-  console.log(props.data.timezone);
-
   return (
     <LocationContainer>
       {showModal && <Modal show={setShowModal} />}
@@ -23,7 +21,7 @@ const CurrentLocation = (props) => {
           temperature={props.data.temp}
           description={props.data.description}
         />
-        <Station city={props.data.cityName} timezone={props.data.timezone} />
+        <Station city={props.data.cityName} />
         <button type="button" onClick={showModalHandler}>
           Choose a new Location
         </button>
@@ -33,6 +31,3 @@ const CurrentLocation = (props) => {
 };
 
 export default CurrentLocation;
-
-// Condition: icon, temperature, description
-// Station: name, time

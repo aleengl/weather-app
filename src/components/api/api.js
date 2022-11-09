@@ -37,3 +37,19 @@ export const getCoordinates = async (city, setDefaultPosition) => {
     });
   } catch (error) {}
 };
+
+export const getLocalTime = async (city, getLocalTime) => {
+  try {
+    const response = await fetch(
+      `https://timezone.abstractapi.com/v1/current_time/?api_key=4840096b0b564aadaba0eec338d0543b&location=${city}`
+    );
+
+    if (!response.ok) {
+      throw new Error("request not successful!");
+    }
+
+    const data = await response.json();
+
+    getLocalTime(data);
+  } catch (error) {}
+};

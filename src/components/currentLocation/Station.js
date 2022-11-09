@@ -1,15 +1,23 @@
 import { Container } from "../styles/Station.styled";
 import Icon from "../Icon/Icon";
 import sprite_icons from "../../img/sprite_icons.svg";
-import {
-  style_locationPin,
-  style_calendar,
-  currentDate,
-  hours,
-  minutes,
-} from "../../constants";
+import { style_locationPin, style_calendar } from "../../constants";
+import { getLocalTime } from "../api/api";
+import { useEffect, useState } from "react";
 
 const Station = (props) => {
+  const [time, getTime] = useState();
+
+  useEffect(() => {
+    if (props.city.length !== 0) {
+      getLocalTime(props.city, getTime);
+    }
+  }, [props.city]);
+
+  // optional chaining => only if time exists => read datetime property
+  // otherwise undefined will be returned
+  const dateIndex = time?.datetime.indexOf(" ");
+
   return (
     <Container>
       <div>
@@ -22,13 +30,11 @@ const Station = (props) => {
       </div>
       <div>
         <Icon file={sprite_icons} icon="icon-calendar" style={style_calendar} />
-        {props.timezone && (
+        {time && (
           <p>
-            {currentDate}
+            {time.datetime.substring(0, dateIndex)}
             <span>
-              {`${(hours + props.timezone / 3600)
-                .toString()
-                .padStart(2, "0")}:${minutes}`}
+              {time.datetime.substring(dateIndex, time.datetime.length - 3)}
             </span>
           </p>
         )}

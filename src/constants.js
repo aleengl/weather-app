@@ -76,7 +76,7 @@ export const changeFontSizeLegend = (value) => (
 
 export const xAxis = (
   <XAxis
-    dataKey="name"
+    dataKey="time"
     tick={{
       fill: "var(--color-white)",
       fontSize: "15px",
@@ -141,11 +141,6 @@ export const legend = (
 //////////////////////////////////
 
 export const centeredMap = [46.89, 11.43]; // coordinates of Sterzing
-// Bolzano as default if Geolocation API not available or fetching user position failed
-export const defaultLocation = {
-  lat: 46.3,
-  long: 11.21,
-};
 
 export const PopupContent = () => {
   return (
