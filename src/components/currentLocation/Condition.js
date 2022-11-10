@@ -20,8 +20,8 @@ const Condition = (props) => {
           />
         )}
       </div>
-      <p>{props.temperature ? `${props.temperature.toFixed(1)}°C` : ""}</p>
-      <span>{props.description ? props.description : ""}</span>
+      <p>{props.temperature ? `${props.temperature.toFixed(1)}°C` : "15°C"}</p>
+      <span>{props.description ? props.description : "sun"}</span>
     </ConditionContainer>
   );
 };

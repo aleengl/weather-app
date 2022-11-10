@@ -6,22 +6,23 @@ import CurrentLocation from "./components/currentLocation/CurrentLocation";
 import Measurement from "./components/measurement/Measurement";
 import Map from "./components/map/Map";
 import { getWeatherData, getCoordinates } from "./components/api/api";
+import LoadingSpinner from "./components/loadingSpinner/LoadingSpinner";
 
-const currentForecast = (data) => {
-  if (!data) {
-    return {
-      icon: "",
-      temp: null,
-      description: "",
-      cityName: "",
-      timezone: "",
-    };
+const filterWeatherData = (weatherData, isPlotted = true) => {
+  if (isPlotted) {
+    const timezone = weatherData.city?.timezone;
+    const timestamps = weatherData.list;
+
+    return { timezone, timestamps };
   }
 
-  const { icon } = data.list[0].weather[0];
-  const { temp } = data.list[0].main;
-  const { description } = data.list[0].weather[0];
-  const { name: cityName, timezone } = data.city;
+  const firstElement = weatherData.list[0];
+
+  const icon = firstElement?.weather[0].icon;
+  const temp = firstElement?.main.temp;
+  const description = firstElement?.weather[0].description;
+  const cityName = weatherData.city?.name;
+  const timezone = weatherData.city?.timezone;
 
   return {
     icon,
@@ -32,69 +33,80 @@ const currentForecast = (data) => {
   };
 };
 
-const futureForecast = (data) => {
-  if (!data) {
-    return {
-      timestamps: [],
-      timezone: null,
-    };
-  }
-
-  const timestamps = data.list.filter((_, index) => index < 5);
-  const { timezone } = data.city;
-
-  return { timestamps, timezone };
-};
-
 const App = () => {
-  const [position, getPosition] = useState({
+  const [position, setPosition] = useState({
     lat: null,
     lon: null,
   });
-  const [weather, getWeather] = useState();
+  const [weather, setWeather] = useState({
+    list: [],
+  });
+  const [isLoading, setIsLoading] = useState(true);
+  const [message, setMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+
+  const success = (position) => {
+    const { latitude: lat, longitude: lon } = position.coords;
+    setMessage(
+      "Could get your position! Weather data will be available soon..."
+    );
+    setTimeout(() => {
+      setPosition({
+        lat: lat,
+        lon: lon,
+      });
+      setIsLoading(false);
+    }, 5000);
+  };
+
+  const error = () => {
+    setMessage(
+      "Could not get your position! Bolzano is set as the default location..."
+    );
+    setTimeout(() => {
+      getCoordinates("Bolzano", setPosition, setErrorMessage);
+      console.log("Geolocation denied!");
+      setIsLoading(false);
+    }, 5000);
+  };
 
   useEffect(() => {
     // test if geolocation is available
     if ("geolocation" in navigator) {
-      // available
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          const { latitude: lat, longitude: lon } = position.coords;
-          getPosition({
-            lat: lat,
-            lon: lon,
-          });
-        },
-        () => {
-          getCoordinates("Bolzano", getPosition);
-          console.log("Geolocation denied");
-        },
-        { enableHighAccuracy: true }
-      );
+      // geolocation available
+      navigator.geolocation.getCurrentPosition(success, error, {
+        enableHighAccuracy: true,
+      });
     } else {
-      // not available
-      console.log("Geolocation not available!");
-      // set Bolzano as default Location
-      getCoordinates("Bolzano", getPosition);
+      // geolocation not available
+      setMessage(
+        "The browser is not able to get your position! Bolzano is set as the default location..."
+      );
+      setTimeout(() => {
+        getCoordinates("Bolzano", setPosition, setErrorMessage);
+        console.log("Geolocation not available!");
+        setIsLoading(false);
+      }, 5000);
     }
   }, []);
 
   useEffect(() => {
     if (position.lat && position.lon) {
-      getWeatherData(position.lat, position.lon, getWeather);
+      getWeatherData(position, setWeather, setErrorMessage);
     }
-  }, [position.lat, position.lon]);
+  }, [position]);
 
-  const currentTimeStamp = currentForecast(weather);
-  const timestamps = futureForecast(weather);
+  const plotWeatherData = filterWeatherData(weather);
+  const forecastWeatherData = filterWeatherData(weather, false);
 
   return (
     <>
+      {isLoading && <LoadingSpinner message={message} />}
       <GlobalStyles />
       <AppContainer>
         <Grid>
-          <CurrentLocation data={currentTimeStamp} />
-          <Measurement data={timestamps} />
+          <CurrentLocation forecastData={forecastWeatherData} />
+          <Measurement plotData={plotWeatherData} error={errorMessage} />
           <Map position={position} />
         </Grid>
       </AppContainer>

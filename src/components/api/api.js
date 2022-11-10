@@ -1,55 +1,74 @@
-import { API_KEY, API_URL_FORECAST, API_URL_LOCATION } from "../../constants";
+import {
+  API_KEY_LOCATION,
+  API_KEY_WEATHER,
+  API_URL_FORECAST,
+  API_URL_LOCATION,
+  API_URL_TIME,
+} from "../../constants";
 
 // get weather data
-export const getWeatherData = async (lat, lon, updateWeather) => {
+export const getWeatherData = async (
+  { lat, lon },
+  updateWeather,
+  updateError
+) => {
   try {
     const response = await fetch(
-      `${API_URL_FORECAST}${lat}&lon=${lon}&appid=${API_KEY}&units=metric`
+      `${API_URL_FORECAST}${lat}&lon=${lon}&cnt=5&appid=${API_KEY_WEATHER}&units=metric`
     );
 
     if (!response.ok) {
-      throw new Error("Fetching the data was not successful!");
+      throw new Error("Could not fetch the weather data!");
     }
 
     const data = await response.json();
     updateWeather(data);
-  } catch (error) {}
+  } catch (error) {
+    updateError(error.message);
+    console.error(`Error: ${error.message}`);
+  }
 };
 
 // get coordinates
-export const getCoordinates = async (city, setDefaultPosition) => {
+export const getCoordinates = async (city, updatePosition, updateError) => {
   try {
     const response = await fetch(
-      `${API_URL_LOCATION}${city}&limit=1&appid=${API_KEY}`
+      `${API_URL_LOCATION}${city}&limit=1&appid=${API_KEY_WEATHER}`
     );
 
     if (!response.ok) {
-      throw new Error("Fetching the data was not successful!");
+      throw new Error("Could not get the coordinates!");
     }
 
     const data = await response.json();
     const [locationData] = data;
     const { lat, lon } = locationData;
 
-    setDefaultPosition({
+    updatePosition({
       lat: lat,
       lon: lon,
     });
-  } catch (error) {}
+  } catch (error) {
+    updateError(error.message);
+    console.error(`Error: ${error.message}`);
+  }
 };
 
+// get local time
 export const getLocalTime = async (city, getLocalTime) => {
   try {
     const response = await fetch(
-      `https://timezone.abstractapi.com/v1/current_time/?api_key=4840096b0b564aadaba0eec338d0543b&location=${city}`
+      `${API_URL_TIME}${API_KEY_LOCATION}&location=${city}`
     );
 
     if (!response.ok) {
-      throw new Error("request not successful!");
+      throw new Error("Could not get the local time!");
     }
 
     const data = await response.json();
 
     getLocalTime(data);
-  } catch (error) {}
+  } catch (error) {
+    console.error(`Error: ${error.message}`);
+  }
 };

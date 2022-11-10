@@ -1,17 +1,16 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-
   form {
     display: flex;
     flex-direction: column;
     gap: 2rem;
-    
+
     div:first-child {
       display: flex;
       align-items: center;
     }
-    
+
     label {
       display: block;
       font-size: 2rem;
@@ -48,5 +47,6 @@ export const Container = styled.div`
       &:hover {
         background-color: #474747;
       }
+    }
   }
 `;

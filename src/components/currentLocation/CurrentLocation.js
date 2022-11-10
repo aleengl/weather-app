@@ -17,11 +17,11 @@ const CurrentLocation = (props) => {
       <div>
         <p>Current Location (+3h)</p>
         <Condition
-          icon={props.data.icon}
-          temperature={props.data.temp}
-          description={props.data.description}
+          icon={props.forecastData.icon}
+          temperature={props.forecastData.temp}
+          description={props.forecastData.description}
         />
-        <Station city={props.data.cityName} />
+        <Station city={props.forecastData.cityName} />
         <button type="button" onClick={showModalHandler}>
           Choose a new Location
         </button>

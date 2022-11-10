@@ -9,7 +9,7 @@ const Station = (props) => {
   const [time, getTime] = useState();
 
   useEffect(() => {
-    if (props.city.length !== 0) {
+    if (props.city) {
       getLocalTime(props.city, getTime);
     }
   }, [props.city]);

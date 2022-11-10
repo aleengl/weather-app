@@ -4,7 +4,7 @@ import { cartesianGrid, xAxis, axis, tip, legend } from "../../constants";
 const TemperatureChart = (props) => {
   console.log(props.data);
 
-  const yAxis = axis("°C", 20);
+  const yAxis = axis("Temperature [°C]", 65);
   const tooltip = tip("°C");
 
   return (
