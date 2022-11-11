@@ -17,19 +17,6 @@ export const API_URL_TIME =
   "https://timezone.abstractapi.com/v1/current_time/?api_key=";
 
 ///////////////////////////////////
-//// DATES
-//////////////////////////////////
-
-// current Date
-const date = new Date();
-const day = `${date.getUTCDate()}`.padStart(2, "0");
-const month = `${date.getUTCMonth() + 1}`.padStart(2, "0");
-
-export const currentDate = `${day}.${month}.${date.getUTCFullYear()} `;
-export const hours = date.getUTCHours();
-export const minutes = `${date.getUTCMinutes()}`.padStart(2, "0");
-
-///////////////////////////////////
 //// STYLING
 //////////////////////////////////
 
@@ -50,20 +37,9 @@ export const style_calendar = {
   width: "2.3rem",
 };
 
-export const style_forecast = {
-  height: "3.5rem",
-  width: "3.5rem",
-  fill: "#fff",
-};
-
 export const style_cloudSun = {
   height: "10rem",
   width: "10rem",
-};
-
-export const style_cloudRain = {
-  height: "3.5rem",
-  width: "3.5rem",
 };
 
 ///////////////////////////////////
@@ -89,7 +65,7 @@ export const xAxis = (
     tickLine={{ stroke: "var(--color-white)" }}
     height={55}
     label={{
-      value: "t [3h]",
+      value: "local time",
       position: "insideBottom",
       fill: "var(--color-white)",
       fontSize: "17px",
@@ -144,7 +120,7 @@ export const legend = (
 //// MAP CHART
 //////////////////////////////////
 
-export const centeredMap = [46.89, 11.43]; // coordinates of Sterzing
+export const centeredMap = [46.89, 11.43]; // coordinates of Sterzing to center the map when first rendering it
 
 export const PopupContent = () => {
   return (

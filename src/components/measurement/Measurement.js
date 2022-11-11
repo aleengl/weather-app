@@ -6,19 +6,19 @@ import RainChart from "../charts/RainChart";
 import WindChart from "../charts/WindChart";
 import { ChartContainer } from "../styles/ChartContainer.styled";
 
-// TODO: fix the time for labels of the xAxis
-
 const getChartParameterForecastData = (timestamps, timezone, parameter) => {
   if (timestamps && timezone) {
     return timestamps.map((obj) => {
+      const date = new Date(obj["dt_txt"]);
+      const timestampInMs = date.getTime();
+      const unixTime = Math.floor(timestampInMs / 1000) + timezone;
+      const time = new Date(unixTime * 1000).toLocaleString("de-DE", {
+        hour: "numeric",
+        minute: "numeric",
+      });
+
       return {
-        time: new Date((obj.dt + timezone + 3600) * 1000).toLocaleString(
-          "de-DE",
-          {
-            hour: "numeric",
-            minute: "numeric",
-          }
-        ),
+        time: time,
         ...(parameter === "temp" && {
           temp: parseFloat(obj.main.temp.toFixed(1)),
           temp_min: parseFloat(obj.main.temp_min.toFixed(1)),
@@ -47,7 +47,7 @@ const getChartParameterForecastData = (timestamps, timezone, parameter) => {
 
 const Measurement = (props) => {
   console.log(props.plotData.timestamps);
-  console.log(props.error);
+  // console.log(props.error);
 
   const plotChartData = getChartParameterForecastData(
     props.plotData.timestamps,
@@ -57,14 +57,9 @@ const Measurement = (props) => {
 
   return (
     <MeasureContainer>
-      {props.error.length !== 0 ? (
-        <p>{props.error}</p>
-      ) : (
-        <ChartContainer>
-          <TemperatureChart data={plotChartData} />
-        </ChartContainer>
-      )}
-
+      <ChartContainer>
+        <TemperatureChart data={plotChartData} />
+      </ChartContainer>
       <div>
         <label htmlFor="parameter">Parameters</label>
         <br />
@@ -81,5 +76,3 @@ const Measurement = (props) => {
 };
 
 export default Measurement;
-
-// TODO: render error messages when fetching the data is not successful

@@ -55,7 +55,7 @@ export const getCoordinates = async (city, updatePosition, updateError) => {
 };
 
 // get local time
-export const getLocalTime = async (city, getLocalTime) => {
+export const getLocalTime = async (city, getLocalTime, updateError) => {
   try {
     const response = await fetch(
       `${API_URL_TIME}${API_KEY_LOCATION}&location=${city}`
@@ -69,6 +69,7 @@ export const getLocalTime = async (city, getLocalTime) => {
 
     getLocalTime(data);
   } catch (error) {
+    updateError(error.message);
     console.error(`Error: ${error.message}`);
   }
 };

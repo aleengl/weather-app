@@ -10,6 +10,12 @@ export const MeasureContainer = styled.div`
   justify-content: space-between;
   gap: 3rem;
 
+  p {
+    // align-self: center;
+    margin-top: 4rem;
+    margin-left: 10rem;
+  }
+
   div label {
     display: inline-block;
     margin-bottom: 1rem;

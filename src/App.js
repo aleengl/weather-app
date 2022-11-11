@@ -7,6 +7,7 @@ import Measurement from "./components/measurement/Measurement";
 import Map from "./components/map/Map";
 import { getWeatherData, getCoordinates } from "./components/api/api";
 import LoadingSpinner from "./components/loadingSpinner/LoadingSpinner";
+import ErrorModal from "./components/modal/ErrorModal";
 
 const filterWeatherData = (weatherData, isPlotted = true) => {
   if (isPlotted) {
@@ -43,7 +44,7 @@ const App = () => {
   });
   const [isLoading, setIsLoading] = useState(true);
   const [message, setMessage] = useState("");
-  const [errorMessage, setErrorMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState();
 
   const success = (position) => {
     const { latitude: lat, longitude: lon } = position.coords;
@@ -64,7 +65,7 @@ const App = () => {
       "Could not get your position! Bolzano is set as the default location..."
     );
     setTimeout(() => {
-      getCoordinates("Bolzano", setPosition, setErrorMessage);
+      getCoordinates("Moskau", setPosition, setErrorMessage);
       console.log("Geolocation denied!");
       setIsLoading(false);
     }, 5000);
@@ -102,11 +103,12 @@ const App = () => {
   return (
     <>
       {isLoading && <LoadingSpinner message={message} />}
+      {errorMessage && <ErrorModal error={errorMessage} />}
       <GlobalStyles />
       <AppContainer>
         <Grid>
           <CurrentLocation forecastData={forecastWeatherData} />
-          <Measurement plotData={plotWeatherData} error={errorMessage} />
+          <Measurement plotData={plotWeatherData} />
           <Map position={position} />
         </Grid>
       </AppContainer>

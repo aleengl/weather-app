@@ -7,10 +7,11 @@ import { useEffect, useState } from "react";
 
 const Station = (props) => {
   const [time, getTime] = useState();
+  const [errorMessage, setErrorMessage] = useState();
 
   useEffect(() => {
     if (props.city) {
-      getLocalTime(props.city, getTime);
+      getLocalTime(props.city, getTime, setErrorMessage);
     }
   }, [props.city]);
 
@@ -30,11 +31,13 @@ const Station = (props) => {
       </div>
       <div>
         <Icon file={sprite_icons} icon="icon-calendar" style={style_calendar} />
-        {time && (
+        {errorMessage ? (
+          <p>{errorMessage}</p>
+        ) : (
           <p>
-            {time.datetime.substring(0, dateIndex)}
+            {time?.datetime.substring(0, dateIndex)}
             <span>
-              {time.datetime.substring(dateIndex, time.datetime.length - 3)}
+              {time?.datetime.substring(dateIndex, time?.datetime.length - 3)}
             </span>
           </p>
         )}

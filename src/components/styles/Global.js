@@ -51,6 +51,7 @@ const GlobalStyles = createGlobalStyle`
   body {
     padding: 5rem 10rem;
     background-image: var(--background-gradient);
+    background-repeat: no-repeat;
     font-family: "Roboto", sans-serif;
     color: var(--color-white);
   }
