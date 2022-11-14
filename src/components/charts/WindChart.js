@@ -4,8 +4,8 @@ import { cartesianGrid, xAxis, axis, tip, legend } from "../../constants";
 const WindChart = (props) => {
   console.log(props.data);
 
-  const yAxis_speed = axis("[km/h]", 55);
-  const yAxis_direction = axis("[deg]", 55);
+  const yAxis_speed = axis("Wind speed (km/h)", 80);
+  const yAxis_direction = axis("Wind direction (deg)", 80);
   const tooltip_speed = tip("km/h");
   const tooltip_direction = tip("°");
 

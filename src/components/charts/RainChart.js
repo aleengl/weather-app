@@ -4,7 +4,7 @@ import { cartesianGrid, xAxis, axis, tip, legend } from "../../constants";
 const RainChart = (props) => {
   console.log(props.data);
 
-  const yAxis = axis("mm", 20);
+  const yAxis = axis("Rain sum (mm)", 55);
   const tooltip = tip("mm");
 
   return (

@@ -4,7 +4,7 @@ import { cartesianGrid, xAxis, axis, tip, legend } from "../../constants";
 const HumidityChart = (props) => {
   console.log(props.data);
 
-  const yAxis = axis("Humidity [%]", 55);
+  const yAxis = axis("Humidity (%)", 45);
   const tooltip = tip("%");
 
   return (

@@ -7,21 +7,7 @@ const GlobalStyles = createGlobalStyle`
     --color-dark: #333333;
     
     // background
-    --background-gradient: linear-gradient(
-            to right bottom,
-            #2b2c30,
-            #2d3138,
-            #2f363f,
-            #2e3c47,
-            #2d424e,
-            #2b414d,
-            #28404c,
-            #263f4b,
-            #233742,
-            #203039,
-            #1d2831,
-            #192128
-    );
+    --background-gradient: linear-gradient(315deg, #1b2c35, #1c2d36, #1f313a, #24363f, #2b3c46, #32444d, #394b55, #40535d, #475a64, #4c606a, #50646e, #51656f);
 
     // border
     --border-white: 2px solid var(--color-white);

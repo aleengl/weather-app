@@ -1,18 +1,21 @@
 import { Fragment } from "react";
+import { useHistory } from "react-router-dom";
 import { ModalContainer, Backdrop } from "../styles/Modal.styled";
 
-const Modal = (props) => {
-  const hideModalButtonHandler = () => {
-    props.show(false);
+const Modal = () => {
+  const history = useHistory();
+
+  const hideBackdropHandler = () => {
+    history.goBack();
   };
 
-  const hideModalBackdropHandler = () => {
-    props.show(false);
+  const hideModalButtonHandler = () => {
+    history.goBack();
   };
 
   return (
     <Fragment>
-      <Backdrop onClick={hideModalBackdropHandler} />
+      <Backdrop onClick={hideBackdropHandler} />
       <ModalContainer>
         <form>
           <div>

@@ -4,7 +4,7 @@ import { cartesianGrid, xAxis, axis, tip, legend } from "../../constants";
 const PressureChart = (props) => {
   console.log(props.data);
 
-  const yAxis = axis("Pressure [hPa]", 65);
+  const yAxis = axis("Pressure (hPa)", 55);
   const tooltip = tip("hPa");
 
   return (

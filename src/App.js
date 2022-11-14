@@ -8,6 +8,8 @@ import Map from "./components/map/Map";
 import { getWeatherData, getCoordinates } from "./components/api/api";
 import LoadingSpinner from "./components/loadingSpinner/LoadingSpinner";
 import ErrorModal from "./components/modal/ErrorModal";
+import { Route, Switch } from "react-router-dom";
+import NotFound from "./components/notFound/NotFound";
 
 const filterWeatherData = (weatherData, isPlotted = true) => {
   if (isPlotted) {
@@ -65,7 +67,7 @@ const App = () => {
       "Could not get your position! Bolzano is set as the default location..."
     );
     setTimeout(() => {
-      getCoordinates("Moskau", setPosition, setErrorMessage);
+      getCoordinates("Bolzano", setPosition, setErrorMessage);
       console.log("Geolocation denied!");
       setIsLoading(false);
     }, 5000);
@@ -102,18 +104,28 @@ const App = () => {
 
   return (
     <>
-      {isLoading && <LoadingSpinner message={message} />}
-      {errorMessage && <ErrorModal error={errorMessage} />}
       <GlobalStyles />
-      <AppContainer>
-        <Grid>
-          <CurrentLocation forecastData={forecastWeatherData} />
-          <Measurement plotData={plotWeatherData} />
-          <Map position={position} />
-        </Grid>
-      </AppContainer>
+      <Switch>
+        <Route path="/">
+          {isLoading && <LoadingSpinner message={message} />}
+          {errorMessage && <ErrorModal error={errorMessage} />}
+          <AppContainer>
+            <Grid>
+              <CurrentLocation forecastData={forecastWeatherData} />
+              <Measurement plotData={plotWeatherData} />
+              <Map position={position} />
+            </Grid>
+          </AppContainer>
+        </Route>
+        <Route path="*">
+          <NotFound />
+        </Route>
+      </Switch>
     </>
   );
 };
 
 export default App;
+
+// TODO: add more Routes => path="/" is not specific enough for all the components => e.g. path /num renders the components => should render the NotFound component
+// TODO: maybe try to improve accuracy with Geolocation API
