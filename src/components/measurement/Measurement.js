@@ -91,9 +91,9 @@ const renderChart = (timestamps, timezone, str) => {
 const Measurement = (props) => {
   const location = useLocation();
   const history = useHistory();
-  // if user manually change the path => synchronize path with state
+  // if user manually change the path => synch path with state
   const [selectValue, setSelectValue] = useState(
-    location.pathname === "/" ? "choose" : location.pathname.substring(1)
+    location.pathname === "/home" ? "choose" : location.pathname.substring(1)
   );
   console.log(props.plotData.timestamps);
 
@@ -106,9 +106,9 @@ const Measurement = (props) => {
     console.log(target.value);
     setSelectValue(target.value);
     if (target.value === "choose") {
-      history.push("/");
+      history.push("/home");
     } else {
-      history.push(`/${target.value}`);
+      history.push(`/home/${target.value}`);
     }
   };
 
@@ -119,7 +119,7 @@ const Measurement = (props) => {
           {options.map((str, index) => {
             const paraToLowerCase = str.toLowerCase();
             return (
-              <Route path={`/${paraToLowerCase}`} key={index}>
+              <Route path={`/home/${paraToLowerCase}`} key={index}>
                 {renderChart(timestamps, timezone, paraToLowerCase)}
               </Route>
             );

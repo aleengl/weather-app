@@ -2,18 +2,21 @@ import { Container } from "../styles/Station.styled";
 import Icon from "../Icon/Icon";
 import sprite_icons from "../../img/sprite_icons.svg";
 import { style_locationPin, style_calendar } from "../../constants";
-import { getLocalTime } from "../api/api";
-import { useEffect, useState } from "react";
+import useHttp from "../hooks/use-http";
+import { useEffect } from "react";
+import { API_URL_TIME, API_KEY_LOCATION } from "../../constants";
 
 const Station = (props) => {
-  const [time, getTime] = useState();
-  const [errorMessage, setErrorMessage] = useState();
+  const { errorMessage, sendRequest: fetchTime, time } = useHttp();
 
   useEffect(() => {
     if (props.city) {
-      getLocalTime(props.city, getTime, setErrorMessage);
+      fetchTime(
+        `${API_URL_TIME}${API_KEY_LOCATION}&location=${props.city}`,
+        "time"
+      );
     }
-  }, [props.city]);
+  }, [props.city, fetchTime]);
 
   // optional chaining => only if time exists => read datetime property
   // otherwise undefined will be returned

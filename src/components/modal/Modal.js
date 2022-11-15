@@ -50,3 +50,5 @@ const Modal = () => {
 };
 
 export default Modal;
+
+// TODO: prevent the user from navigating away when the form is not yet submitted and he has written some data there => preventing Transitions section

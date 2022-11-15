@@ -8,12 +8,12 @@ const CurrentLocation = (props) => {
   const history = useHistory();
 
   const showModalHandler = () => {
-    history.push("/new-location");
+    history.push("/home/new-location");
   };
 
   return (
     <LocationContainer>
-      <Route path="/new-location">
+      <Route path="/home/new-location">
         <Modal />
       </Route>
       <div>
