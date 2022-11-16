@@ -5,7 +5,13 @@ import HumidityChart from "../charts/HumidityChart";
 import RainChart from "../charts/RainChart";
 import WindChart from "../charts/WindChart";
 import { ChartContainer } from "../styles/ChartContainer.styled";
-import { Route, Switch, useHistory, useLocation } from "react-router-dom";
+import {
+  Route,
+  Switch,
+  useHistory,
+  useLocation,
+  useRouteMatch,
+} from "react-router-dom";
 import { useState } from "react";
 
 const getChartParameterForecastData = (timestamps, timezone, parameter) => {
@@ -91,9 +97,12 @@ const renderChart = (timestamps, timezone, str) => {
 const Measurement = (props) => {
   const location = useLocation();
   const history = useHistory();
+  const match = useRouteMatch();
   // if user manually change the path => synch path with state
   const [selectValue, setSelectValue] = useState(
-    location.pathname === "/home" ? "choose" : location.pathname.substring(1)
+    location.pathname === `${match.path}`
+      ? "choose"
+      : location.pathname.substring(1)
   );
   console.log(props.plotData.timestamps);
 
@@ -106,9 +115,9 @@ const Measurement = (props) => {
     console.log(target.value);
     setSelectValue(target.value);
     if (target.value === "choose") {
-      history.push("/home");
+      history.push(`${match.path}`);
     } else {
-      history.push(`/home/${target.value}`);
+      history.push(`${match.path}/${target.value}`);
     }
   };
 
@@ -119,7 +128,7 @@ const Measurement = (props) => {
           {options.map((str, index) => {
             const paraToLowerCase = str.toLowerCase();
             return (
-              <Route path={`/home/${paraToLowerCase}`} key={index}>
+              <Route path={`${match.path}/${paraToLowerCase}`} key={index}>
                 {renderChart(timestamps, timezone, paraToLowerCase)}
               </Route>
             );

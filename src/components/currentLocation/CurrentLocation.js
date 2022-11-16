@@ -2,18 +2,19 @@ import LocationContainer from "../styles/CurrentLocation.styled";
 import Condition from "./Condition";
 import Station from "./Station";
 import Modal from "../modal/Modal";
-import { Route, useHistory } from "react-router-dom";
+import { Route, useHistory, useRouteMatch } from "react-router-dom";
 
 const CurrentLocation = (props) => {
   const history = useHistory();
+  const match = useRouteMatch();
 
   const showModalHandler = () => {
-    history.push("/home/new-location");
+    history.push(`${match.path}/new-location`);
   };
 
   return (
     <LocationContainer>
-      <Route path="/home/new-location">
+      <Route path={`${match.path}/new-location`}>
         <Modal />
       </Route>
       <div>
@@ -33,5 +34,3 @@ const CurrentLocation = (props) => {
 };
 
 export default CurrentLocation;
-
-// TODO: add Portal to Modal to move it in other position in the real DOM

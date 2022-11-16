@@ -46,7 +46,7 @@ const useHttp = () => {
       } catch (error) {
         setErrorMessage(error.message);
         console.error(`Error: ${error.message}`);
-        history.push("/error");
+        history.push("/home/error");
       }
     },
     [history]
