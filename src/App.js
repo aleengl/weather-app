@@ -2,13 +2,7 @@ import React, { Suspense } from "react";
 import GlobalStyles from "./components/styles/Global";
 import AppContainer from "./components/styles/AppContainer.styled";
 import Grid from "./components/styles/Grid.styled";
-// import CurrentLocation from "./components/currentLocation/CurrentLocation";
-// import Measurement from "./components/measurement/Measurement";
-// import Map from "./components/map/Map";
-// import LoadingSpinner from "./components/loadingSpinner/LoadingSpinner";
-// import ErrorModal from "./components/modal/ErrorModal";
 import { Route, Switch } from "react-router-dom";
-// import NotFound from "./components/notFound/NotFound";
 import useGeolocation from "./components/hooks/use-geolocation";
 
 const filterWeatherData = (weatherData, isPlotted = true) => {
@@ -51,6 +45,7 @@ const Measurement = React.lazy(() =>
 const Map = React.lazy(() => import("./components/map/Map"));
 
 const App = () => {
+  // custom geolocation hook to not pollute the component
   const { isLoading, message, errorMessage, weatherData, position } =
     useGeolocation();
 
@@ -60,13 +55,14 @@ const App = () => {
   return (
     <>
       <GlobalStyles />
-      <Suspense fallback={<p>Loading...</p>}>
+      <Suspense fallback={<LoadingSpinner message="Loading..." />}>
         <Switch>
           <Route path="/" exact>
             {isLoading && <LoadingSpinner message={message} />}
           </Route>
           <Route path="/home/error">
-            {errorMessage && <ErrorModal error={errorMessage} />}
+            {errorMessage && <ErrorModal error={errorMessage} />}{" "}
+            {/* may handle showing the errorModal differently */}
           </Route>
           <Route path="/home">
             <AppContainer>
@@ -88,10 +84,9 @@ const App = () => {
 
 export default App;
 
-// TODO: add lazy loading for Measurement component too!!!
-// TODO: add lazy loading for Routes => download code when user visits the route
-// TODO: improve Routes
+// TODO: work on ErrorModal component and the use-http => try creating errors for different request...
 // TODO: maybe try to improve accuracy with Geolocation API
 // TODO: look at the definition of the parameters of the API => first timestamp maybe the current temperature and not the 3h
 // TODO: improve the plots => adjust the yAxis => search for nicer colors
-// TODO: improve loading spinner and 404 page
+// TODO: show additional Data in Popup in Map component
+// TODO: implement search for a new location

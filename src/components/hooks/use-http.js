@@ -21,11 +21,15 @@ const useHttp = () => {
       try {
         const response = await fetch(url);
 
+        console.log(response);
+
         if (!response.ok) {
           throw new Error("Request failed!");
         }
 
         const data = await response.json();
+
+        console.log(data);
 
         if (type === "coordinates") {
           const [locationData] = data;
@@ -45,7 +49,7 @@ const useHttp = () => {
         }
       } catch (error) {
         setErrorMessage(error.message);
-        console.error(`Error: ${error.message}`);
+        console.error(`Error: ${error}`);
         history.push("/home/error");
       }
     },

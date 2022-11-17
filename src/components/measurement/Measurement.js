@@ -1,9 +1,5 @@
+import React, { Suspense } from "react";
 import { MeasureContainer } from "../styles/Measurement.styled";
-import TemperatureChart from "../charts/TemperatureChart";
-import PressureChart from "../charts/PressureChart";
-import HumidityChart from "../charts/HumidityChart";
-import RainChart from "../charts/RainChart";
-import WindChart from "../charts/WindChart";
 import { ChartContainer } from "../styles/ChartContainer.styled";
 import {
   Route,
@@ -13,6 +9,13 @@ import {
   useRouteMatch,
 } from "react-router-dom";
 import { useState } from "react";
+import LoadingSpinner from "../loadingSpinner/LoadingSpinner";
+
+const TemperatureChart = React.lazy(() => import("../charts/TemperatureChart"));
+const PressureChart = React.lazy(() => import("../charts/PressureChart"));
+const HumidityChart = React.lazy(() => import("../charts/HumidityChart"));
+const RainChart = React.lazy(() => import("../charts/RainChart"));
+const WindChart = React.lazy(() => import("../charts/WindChart"));
 
 const getChartParameterForecastData = (timestamps, timezone, parameter) => {
   if (timestamps && timezone) {
@@ -124,16 +127,18 @@ const Measurement = (props) => {
   return (
     <MeasureContainer>
       <ChartContainer>
-        <Switch>
-          {options.map((str, index) => {
-            const paraToLowerCase = str.toLowerCase();
-            return (
-              <Route path={`${match.path}/${paraToLowerCase}`} key={index}>
-                {renderChart(timestamps, timezone, paraToLowerCase)}
-              </Route>
-            );
-          })}
-        </Switch>
+        <Suspense fallback={<LoadingSpinner message="Chart is loading..." />}>
+          <Switch>
+            {options.map((str, index) => {
+              const paraToLowerCase = str.toLowerCase();
+              return (
+                <Route path={`${match.path}/${paraToLowerCase}`} key={index}>
+                  {renderChart(timestamps, timezone, paraToLowerCase)}
+                </Route>
+              );
+            })}
+          </Switch>
+        </Suspense>
       </ChartContainer>
       <div>
         <label htmlFor="parameter">Parameters</label>
