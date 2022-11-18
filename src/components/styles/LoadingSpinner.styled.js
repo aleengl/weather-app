@@ -1,7 +1,8 @@
 import styled from "styled-components";
 
 const LoadingWrapper = styled.div`
-  position: fixed;
+  position: ${(props) =>
+    props.loadingMessage === "Chart is loading..." ? "absolute" : "fixed"};
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -11,8 +12,12 @@ const LoadingWrapper = styled.div`
   right: 0;
   bottom: 0;
   top: 0;
-  background-color: rgba(0, 0, 0, 0.9);
-  z-index: 10;
+  background-color: ${(props) =>
+    props.loadingMessage === "Chart is loading..."
+      ? "noone"
+      : "rgba(0, 0, 0, 0.9)"};
+  z-index: ${(props) =>
+    props.loadingMessage === "Chart is loading..." ? "1" : "10"};
   font-size: 2rem;
 
   & > div:first-child {

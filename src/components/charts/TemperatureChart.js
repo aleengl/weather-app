@@ -10,19 +10,19 @@ const TemperatureChart = (props) => {
   return (
     <ResponsiveContainer width="95%">
       <LineChart width={1000} height={500} data={props.data}>
-        <Line type="monotone" dataKey="temp" strokeWidth={3} stroke="#ff4d4d" />
+        <Line type="monotone" dataKey="temp" strokeWidth={3} stroke="#E2DEF0" />
         <Line
           type="monotone"
           dataKey="temp_min"
           strokeWidth={3}
-          stroke="#8080ff"
+          stroke="#94D8F0"
         />
-        <Line
+        {/* <Line
           type="monotone"
           dataKey="temp_max"
           strokeWidth={3}
           stroke="#ff0000"
-        />
+  /> */}
         {cartesianGrid}
         {xAxis}
         {yAxis}

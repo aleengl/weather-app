@@ -15,7 +15,7 @@ const RainChart = (props) => {
         {yAxis}
         {tooltip}
         {legend}
-        <Bar dataKey="rain" fill="#394f89">
+        <Bar dataKey="rain" fill="#94D8F0">
           <LabelList
             dataKey={props.data.rain}
             position="top"

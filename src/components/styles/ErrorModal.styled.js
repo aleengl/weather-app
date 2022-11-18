@@ -1,9 +1,7 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
-const ErrorModalContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
+export const ErrorModalContainer = styled.div`
   font-size: 3rem;
   text-align: center;
   position: fixed;
@@ -11,13 +9,37 @@ const ErrorModalContainer = styled.div`
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.9);
+  background-image: linear-gradient(#0c0e10, #364e68);
   z-index: 99;
 
-  svg {
-    height: 100px;
-    width: 100px;
+  div {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    h1 {
+      text-shadow: 0 0 1rem #fefefe;
+      margin-bottom: 3rem;
+    }
+
+    svg {
+      height: 300px;
+      width: 300px;
+    }
   }
 `;
 
-export default ErrorModalContainer;
+export const ReloadLink = styled(Link)`
+  display: inline-block;
+  padding: 1rem 3rem;
+  text-decoration: none;
+  color: inherit;
+  border: 3px solid #fff;
+  border-radius: 10px;
+  transition: all 0.2s;
+
+  &:hover {
+    background-color: #3a4756;
+  }
+`;

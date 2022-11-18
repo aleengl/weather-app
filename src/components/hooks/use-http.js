@@ -23,8 +23,16 @@ const useHttp = () => {
 
         console.log(response);
 
-        if (!response.ok) {
-          throw new Error("Request failed!");
+        if (!response.ok && type === "weather") {
+          throw new Error("Weather data not available!");
+        }
+
+        if (!response.ok && type === "coordinates") {
+          throw new Error("Coordinates not available!");
+        }
+
+        if (!response.ok && type === "time") {
+          throw new Error("Local time not available!");
         }
 
         const data = await response.json();
@@ -49,8 +57,10 @@ const useHttp = () => {
         }
       } catch (error) {
         setErrorMessage(error.message);
-        console.error(`Error: ${error}`);
-        history.push("/home/error");
+        console.error(`Error: ${error.message}`);
+        if (type !== "time") {
+          history.push("/home/error");
+        }
       }
     },
     [history]

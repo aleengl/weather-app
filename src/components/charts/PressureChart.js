@@ -12,19 +12,13 @@ const PressureChart = (props) => {
       <LineChart width={1000} height={500} data={props.data}>
         <Line
           type="monotone"
-          dataKey="pressure"
+          dataKey="sea_level"
           strokeWidth={3}
-          stroke="#c2d0e1"
+          stroke="#C6D0D6"
         />
         <Line
           type="monotone"
-          dataKey="seaLevel"
-          strokeWidth={3}
-          stroke="#e1c2d0"
-        />
-        <Line
-          type="monotone"
-          dataKey="groundLevel"
+          dataKey="grnd_level"
           strokeWidth={3}
           stroke="#d0e1c2"
         />

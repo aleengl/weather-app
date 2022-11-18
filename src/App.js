@@ -61,8 +61,11 @@ const App = () => {
             {isLoading && <LoadingSpinner message={message} />}
           </Route>
           <Route path="/home/error">
-            {errorMessage && <ErrorModal error={errorMessage} />}{" "}
-            {/* may handle showing the errorModal differently */}
+            {errorMessage ? (
+              <ErrorModal error={errorMessage} />
+            ) : (
+              <LoadingSpinner message="Redirect to home..." />
+            )}
           </Route>
           <Route path="/home">
             <AppContainer>
@@ -84,7 +87,6 @@ const App = () => {
 
 export default App;
 
-// TODO: work on ErrorModal component and the use-http => try creating errors for different request...
 // TODO: maybe try to improve accuracy with Geolocation API
 // TODO: look at the definition of the parameters of the API => first timestamp maybe the current temperature and not the 3h
 // TODO: improve the plots => adjust the yAxis => search for nicer colors

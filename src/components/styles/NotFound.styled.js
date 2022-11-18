@@ -17,16 +17,16 @@ export const NotFoundContainer = styled.div`
     top: 40%;
     left: 50%;
     transform: translate(-50%, -50%);
-  }
 
-  h1 {
-    text-shadow: 0 0 1rem #fefefe;
-    margin-bottom: 3rem;
-    font-size: 15rem;
-  }
+    h1 {
+      text-shadow: 0 0 1rem #fefefe;
+      margin-bottom: 3rem;
+      font-size: 15rem;
+    }
 
-  p {
-    margin-bottom: 6rem;
+    p {
+      margin-bottom: 6rem;
+    }
   }
 `;
 

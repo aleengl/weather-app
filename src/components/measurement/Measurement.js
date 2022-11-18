@@ -33,10 +33,8 @@ const getChartParameterForecastData = (timestamps, timezone, parameter) => {
         ...(parameter === "temperature" && {
           temp: parseFloat(obj.main.temp.toFixed(1)),
           temp_min: parseFloat(obj.main.temp_min.toFixed(1)),
-          temp_max: parseFloat(obj.main.temp_max.toFixed(1)),
         }),
         ...(parameter === "pressure" && {
-          pressure: obj.main.pressure,
           grnd_level: obj.main.grnd_level,
           sea_level: obj.main.sea_level,
         }),

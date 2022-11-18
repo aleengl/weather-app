@@ -97,12 +97,12 @@ export const tip = (unit) => (
     wrapperStyle={{
       color: "#000",
       outline: "none",
-      border: "2px solid #000",
     }}
     contentStyle={{
       fontSize: "15px",
     }}
     labelStyle={{ marginBottom: "10px" }}
+    itemStyle={{ color: "#000" }}
     formatter={(value) => `${value}${unit}`}
   />
 );

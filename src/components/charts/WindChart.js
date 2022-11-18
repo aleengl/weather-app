@@ -16,13 +16,13 @@ const WindChart = (props) => {
           <Line
             type="monotone"
             dataKey="speed"
-            stroke="#bfd6d9"
+            stroke="#B5D684"
             strokeWidth={3}
           />
           <Line
             type="monotone"
             dataKey="gust"
-            stroke="#94a6a8"
+            stroke="#AFD6C6"
             strokeWidth={3}
           />
           {cartesianGrid}
@@ -35,7 +35,7 @@ const WindChart = (props) => {
           <Line
             type="monotone"
             dataKey="deg"
-            stroke="#cccccc"
+            stroke="#94D8F0"
             strokeWidth={3}
           />
           {cartesianGrid}

@@ -35,6 +35,7 @@ const GlobalStyles = createGlobalStyle`
   }
 
   body {
+    height: 100%;
     padding: 5rem 10rem;
     background-image: var(--background-gradient);
     background-repeat: no-repeat;
