@@ -81,7 +81,7 @@ const useGeolocation = () => {
   useEffect(() => {
     if (position.lat && position.lon) {
       fetchData(
-        `${API_URL_FORECAST}${position.lat}&lon=${position.lon}&cnt=5&appid=${API_KEY_WEATHER}&units=metric`,
+        `${API_URL_FORECAST}${position.lat}&lon=${position.lon}&cnt=6&appid=${API_KEY_WEATHER}&units=metric`,
         "weather"
       );
     }

@@ -27,7 +27,6 @@ const getChartParameterForecastData = (timestamps, timezone, parameter) => {
         hour: "numeric",
         minute: "numeric",
       });
-
       return {
         time: time,
         ...(parameter === "temperature" && {
@@ -106,6 +105,7 @@ const Measurement = (props) => {
       : location.pathname.substring(1)
   );
   console.log(props.plotData.timestamps);
+  console.log(props.plotData.timezone);
 
   const timestamps = props.plotData.timestamps;
   const timezone = props.plotData.timezone;

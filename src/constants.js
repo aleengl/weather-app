@@ -75,6 +75,8 @@ export const xAxis = (
 
 export const axis = (parameter, shiftY) => (
   <YAxis
+    type="number"
+    domain={["auto", "auto"]}
     tick={{
       fill: "var(--color-white)",
       fontSize: "15px",
@@ -89,6 +91,7 @@ export const axis = (parameter, shiftY) => (
       fontSize: "17px",
       dy: shiftY,
     }}
+    allowDecimals={false}
   />
 );
 

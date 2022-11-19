@@ -17,12 +17,6 @@ const TemperatureChart = (props) => {
           strokeWidth={3}
           stroke="#94D8F0"
         />
-        {/* <Line
-          type="monotone"
-          dataKey="temp_max"
-          strokeWidth={3}
-          stroke="#ff0000"
-  /> */}
         {cartesianGrid}
         {xAxis}
         {yAxis}

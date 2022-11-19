@@ -8,16 +8,16 @@ import useGeolocation from "./components/hooks/use-geolocation";
 const filterWeatherData = (weatherData, isPlotted = true) => {
   if (isPlotted) {
     const timezone = weatherData.city?.timezone;
-    const timestamps = weatherData.list;
+    const timestamps = weatherData.list.slice(1);
 
     return { timezone, timestamps };
   }
 
-  const firstElement = weatherData.list[0];
+  const firstTimestamp = weatherData.list[0];
 
-  const icon = firstElement?.weather[0].icon;
-  const temp = firstElement?.main.temp;
-  const description = firstElement?.weather[0].description;
+  const icon = firstTimestamp?.weather[0].icon;
+  const temp = firstTimestamp?.main.temp;
+  const description = firstTimestamp?.weather[0].description;
   const cityName = weatherData.city?.name;
   const timezone = weatherData.city?.timezone;
 
@@ -27,6 +27,7 @@ const filterWeatherData = (weatherData, isPlotted = true) => {
     description,
     cityName,
     timezone,
+    firstTimestamp,
   };
 };
 
@@ -87,8 +88,7 @@ const App = () => {
 
 export default App;
 
+// TODO: in CurrentLocation component show forecasted time differently
 // TODO: maybe try to improve accuracy with Geolocation API
-// TODO: look at the definition of the parameters of the API => first timestamp maybe the current temperature and not the 3h
-// TODO: improve the plots => adjust the yAxis => search for nicer colors
 // TODO: show additional Data in Popup in Map component
-// TODO: implement search for a new location
+// TODO: implement search for a new location => use Geocoding API => already in use for getting the coordinates when user does not accept the geolocation
