@@ -1,9 +1,30 @@
 import React, { Suspense } from "react";
+import { ThemeProvider } from "styled-components";
 import GlobalStyles from "./components/styles/Global";
-import AppContainer from "./components/styles/AppContainer.styled";
-import Grid from "./components/styles/Grid.styled";
+import StyledContainer from "./components/styles/Container.styled";
+import { StyledGrid } from "./components/styles/Grid.styled";
 import { Route, Switch } from "react-router-dom";
 import useGeolocation from "./components/hooks/use-geolocation";
+
+const theme = {
+  colors: {
+    white: "#fff",
+    dark: "#333333",
+    black: "#000",
+  },
+  background: {
+    gradient:
+      "linear-gradient(315deg, #1b2c35, #1c2d36, #1f313a, #24363f, #2b3c46, #32444d, #394b55, #40535d, #475a64, #4c606a, #50646e, #51656f)",
+  },
+  border: {
+    whiteBorder: "2px solid #fff",
+    smallRadius: "5px",
+    bigRadius: "15px",
+  },
+  transition: {
+    all: "all .2s",
+  },
+};
 
 const filterWeatherData = (weatherData, isPlotted = true) => {
   if (isPlotted) {
@@ -55,40 +76,49 @@ const App = () => {
 
   return (
     <>
-      <GlobalStyles />
-      <Suspense fallback={<LoadingSpinner message="Loading..." />}>
-        <Switch>
-          <Route path="/" exact>
-            {isLoading && <LoadingSpinner message={message} />}
-          </Route>
-          <Route path="/home/error">
-            {errorMessage ? (
-              <ErrorModal error={errorMessage} />
-            ) : (
-              <LoadingSpinner message="Redirect to home..." />
-            )}
-          </Route>
-          <Route path="/home">
-            <AppContainer>
-              <Grid>
-                <CurrentLocation forecastData={forecastWeatherData} />
-                <Measurement plotData={plotWeatherData} />
-                <Map position={position} />
-              </Grid>
-            </AppContainer>
-          </Route>
-          <Route path="*">
-            <NotFound />
-          </Route>
-        </Switch>
-      </Suspense>
+      <ThemeProvider theme={theme}>
+        <GlobalStyles />
+        <Suspense fallback={<LoadingSpinner message="Loading..." />}>
+          <Switch>
+            <Route path="/" exact>
+              {isLoading && <LoadingSpinner message={message} />}
+            </Route>
+            <Route path="/home/error">
+              {errorMessage ? (
+                <ErrorModal error={errorMessage} />
+              ) : (
+                <LoadingSpinner message="Redirect to home..." />
+              )}
+            </Route>
+            <Route path="/home">
+              <StyledContainer>
+                <StyledGrid>
+                  <CurrentLocation forecastData={forecastWeatherData} />
+                  <Measurement plotData={plotWeatherData} />
+                  <Map position={position} />
+                </StyledGrid>
+              </StyledContainer>
+            </Route>
+            <Route path="*">
+              <NotFound />
+            </Route>
+          </Switch>
+        </Suspense>
+      </ThemeProvider>
     </>
   );
 };
 
 export default App;
 
+// TODO: changes themes everywhere and delete :root in Global.js!!
+// TODO: yAxis label is not moving!!
+// TODO: All Charts components line 12 are breaking when refreshing => props.data[0].theme is undefined??? => maybe add fallback for all colors if undefined
+
+// TODO: put all styles of a component in one styled component
 // TODO: in CurrentLocation component show forecasted time differently
 // TODO: maybe try to improve accuracy with Geolocation API
 // TODO: show additional Data in Popup in Map component
 // TODO: implement search for a new location => use Geocoding API => already in use for getting the coordinates when user does not accept the geolocation
+
+// TODO: change styling of icons used => Condition component, Icon and Icon.styled, constants

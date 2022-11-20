@@ -13,9 +13,9 @@ export const Backdrop = styled.div`
 export const ModalContainer = styled.div`
   padding: 3rem;
   font-size: 2rem;
-  background-image: var(--background-gradient);
-  border-radius: var(--border-radius--big);
-  border: var(--border-white);
+  background-image: ${({ theme }) => theme.background.gradient};
+  border-radius: ${({ theme }) => theme.border.bigRadius};
+  border: ${({ theme }) => theme.border.whiteBorder};
   position: fixed;
   top: 50%;
   left: 50%;
@@ -30,7 +30,7 @@ export const ModalContainer = styled.div`
     background-color: transparent;
     font-size: 2.5rem;
     cursor: pointer;
-    color: var(--color-white);
+    color: ${({ theme }) => theme.colors.white};
 
     &:hover,
     &:active {
@@ -51,13 +51,13 @@ export const ModalContainer = styled.div`
     input {
       width: 100%;
       padding: 1rem 2rem;
-      border: var(--border-white);
-      border-radius: var(--border-radius--small);
+      border: ${({ theme }) => theme.border.whiteBorder};
+      border-radius: ${({ theme }) => theme.border.smallRadius};
       outline: none;
       color: inherit;
       font: inherit;
-      background-color: var(--color-dark);
-      transition: var(--transition-all);
+      background-color: ${({ theme }) => theme.colors.dark};
+      transition: ${({ theme }) => theme.transition.all};
 
       &:focus {
         background-color: #474747;
@@ -65,14 +65,14 @@ export const ModalContainer = styled.div`
     }
 
     button {
-      background-color: var(--color-dark);
+      background-color: ${({ theme }) => theme.colors.dark};
       color: inherit;
       font: inherit;
       padding: 1rem 6rem;
-      border: var(--border-white);
-      border-radius: var(--border-radius--small);
+      border: ${({ theme }) => theme.border.whiteBorder};
+      border-radius: ${({ theme }) => theme.border.smallRadius};
       cursor: pointer;
-      transition: var(--transition-all);
+      transition: ${({ theme }) => theme.transition.all};
 
       &:hover,
       &:active {

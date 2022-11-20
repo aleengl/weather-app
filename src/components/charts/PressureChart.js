@@ -1,12 +1,11 @@
 import { ResponsiveContainer, LineChart, Line } from "recharts";
-import { cartesianGrid, xAxis, axis, tip, legend } from "../../constants";
+import StyledYAxis from "./chartElements/StyledYAxis";
+import StyledXAxis from "./chartElements/StyledXAxis";
+import StyledTooltip from "./chartElements/StyledTooltip";
+import StyledLegend from "./chartElements/StyledLegend";
+import { StyledCartesianGrid } from "../styles/Chart.styled";
 
 const PressureChart = (props) => {
-  console.log(props.data);
-
-  const yAxis = axis("Pressure (hPa)", 55);
-  const tooltip = tip("hPa");
-
   return (
     <ResponsiveContainer width="95%">
       <LineChart width={1000} height={500} data={props.data}>
@@ -22,11 +21,11 @@ const PressureChart = (props) => {
           strokeWidth={3}
           stroke="#d0e1c2"
         />
-        {cartesianGrid}
-        {xAxis}
-        {yAxis}
-        {tooltip}
-        {legend}
+        <StyledCartesianGrid strokeDasharray="5 5" />
+        {StyledXAxis(props.data[0].theme)}
+        {StyledYAxis(props.data[0].theme, "Pressure (hPa)", 65)}
+        {StyledTooltip("hPa")}
+        {StyledLegend()}
       </LineChart>
     </ResponsiveContainer>
   );

@@ -1,6 +1,6 @@
 import React, { Suspense } from "react";
 import { MeasureContainer } from "../styles/Measurement.styled";
-import { ChartContainer } from "../styles/ChartContainer.styled";
+import { StyledChart } from "../styles/Chart.styled";
 import {
   Route,
   Switch,
@@ -10,6 +10,8 @@ import {
 } from "react-router-dom";
 import { useState } from "react";
 import LoadingSpinner from "../loadingSpinner/LoadingSpinner";
+import { useContext } from "react";
+import { ThemeContext } from "styled-components";
 
 const TemperatureChart = React.lazy(() => import("../charts/TemperatureChart"));
 const PressureChart = React.lazy(() => import("../charts/PressureChart"));
@@ -17,7 +19,12 @@ const HumidityChart = React.lazy(() => import("../charts/HumidityChart"));
 const RainChart = React.lazy(() => import("../charts/RainChart"));
 const WindChart = React.lazy(() => import("../charts/WindChart"));
 
-const getChartParameterForecastData = (timestamps, timezone, parameter) => {
+const getChartParameterForecastData = (
+  timestamps,
+  timezone,
+  parameter,
+  theme
+) => {
   if (timestamps && timezone) {
     return timestamps.map((obj) => {
       const date = new Date(obj["dt_txt"]);
@@ -28,6 +35,7 @@ const getChartParameterForecastData = (timestamps, timezone, parameter) => {
         minute: "numeric",
       });
       return {
+        theme: theme,
         time: time,
         ...(parameter === "temperature" && {
           temp: parseFloat(obj.main.temp.toFixed(1)),
@@ -53,7 +61,7 @@ const getChartParameterForecastData = (timestamps, timezone, parameter) => {
   return [];
 };
 
-const renderChart = (timestamps, timezone, str) => {
+const renderChart = (timestamps, timezone, str, theme) => {
   switch (str) {
     case "temperature":
       return (
@@ -61,32 +69,53 @@ const renderChart = (timestamps, timezone, str) => {
           data={getChartParameterForecastData(
             timestamps,
             timezone,
-            "temperature"
+            "temperature",
+            theme
           )}
         />
       );
     case "pressure":
       return (
         <PressureChart
-          data={getChartParameterForecastData(timestamps, timezone, "pressure")}
+          data={getChartParameterForecastData(
+            timestamps,
+            timezone,
+            "pressure",
+            theme
+          )}
         />
       );
     case "wind":
       return (
         <WindChart
-          data={getChartParameterForecastData(timestamps, timezone, "wind")}
+          data={getChartParameterForecastData(
+            timestamps,
+            timezone,
+            "wind",
+            theme
+          )}
         />
       );
     case "humidity":
       return (
         <HumidityChart
-          data={getChartParameterForecastData(timestamps, timezone, "humidity")}
+          data={getChartParameterForecastData(
+            timestamps,
+            timezone,
+            "humidity",
+            theme
+          )}
         />
       );
     case "rain":
       return (
         <RainChart
-          data={getChartParameterForecastData(timestamps, timezone, "rain")}
+          data={getChartParameterForecastData(
+            timestamps,
+            timezone,
+            "rain",
+            theme
+          )}
         />
       );
     default:
@@ -104,8 +133,8 @@ const Measurement = (props) => {
       ? "choose"
       : location.pathname.substring(1)
   );
-  console.log(props.plotData.timestamps);
-  console.log(props.plotData.timezone);
+  // access the themes defined by the ThemeProvider
+  const themeProps = useContext(ThemeContext);
 
   const timestamps = props.plotData.timestamps;
   const timezone = props.plotData.timezone;
@@ -113,7 +142,6 @@ const Measurement = (props) => {
 
   const changeSelectHandler = (event) => {
     const target = event.target;
-    console.log(target.value);
     setSelectValue(target.value);
     if (target.value === "choose") {
       history.push(`${match.path}`);
@@ -124,20 +152,25 @@ const Measurement = (props) => {
 
   return (
     <MeasureContainer>
-      <ChartContainer>
+      <StyledChart>
         <Suspense fallback={<LoadingSpinner message="Chart is loading..." />}>
           <Switch>
             {options.map((str, index) => {
               const paraToLowerCase = str.toLowerCase();
               return (
                 <Route path={`${match.path}/${paraToLowerCase}`} key={index}>
-                  {renderChart(timestamps, timezone, paraToLowerCase)}
+                  {renderChart(
+                    timestamps,
+                    timezone,
+                    paraToLowerCase,
+                    themeProps
+                  )}
                 </Route>
               );
             })}
           </Switch>
         </Suspense>
-      </ChartContainer>
+      </StyledChart>
       <div>
         <label htmlFor="parameter">Parameters</label>
         <br />

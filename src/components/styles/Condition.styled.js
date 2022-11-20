@@ -1,9 +1,9 @@
 import styled from "styled-components";
 
-export const ConditionContainer = styled.div`
+export const StyledCondition = styled.div`
   padding-bottom: 1rem;
-  border-bottom: 1px solid var(--color-white);
-  color: var(--color-white);
+  border-bottom: 1px solid ${({ theme }) => theme.colors.white};
+  color: ${({ theme }) => theme.colors.white};
 
   p {
     font-size: 5rem;

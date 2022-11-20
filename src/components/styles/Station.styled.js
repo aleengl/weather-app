@@ -16,7 +16,7 @@ export const Container = styled.div`
   div:first-child span,
   div:last-child p {
     font-size: 1.8rem;
-    color: var(--color-white);
+    color: ${({ theme }) => theme.colors.white};
   }
 
   div:last-child p span {

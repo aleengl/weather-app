@@ -1,12 +1,11 @@
 import { ResponsiveContainer, AreaChart, Area } from "recharts";
-import { cartesianGrid, xAxis, axis, tip, legend } from "../../constants";
+import { StyledCartesianGrid } from "../styles/Chart.styled";
+import StyledYAxis from "./chartElements/StyledYAxis";
+import StyledXAxis from "./chartElements/StyledXAxis";
+import StyledTooltip from "./chartElements/StyledTooltip";
+import StyledLegend from "./chartElements/StyledLegend";
 
 const HumidityChart = (props) => {
-  console.log(props.data);
-
-  const yAxis = axis("Humidity (%)", 45);
-  const tooltip = tip("%");
-
   return (
     <ResponsiveContainer width="95%">
       <AreaChart height={1000} width={500} data={props.data}>
@@ -16,11 +15,11 @@ const HumidityChart = (props) => {
             <stop offset="95%" stopColor="#8884d8" stopOpacity={0} />
           </linearGradient>
         </defs>
-        {cartesianGrid}
-        {xAxis}
-        {yAxis}
-        {tooltip}
-        {legend}
+        <StyledCartesianGrid strokeDasharray="5 5" />
+        {StyledXAxis(props.data[0].theme)}
+        {StyledYAxis(props.data[0].theme, "Humidity (%)", 65)}
+        {StyledTooltip("%")}
+        {StyledLegend()}
         <Area
           type="monotone"
           dataKey="humidity"

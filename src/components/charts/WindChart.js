@@ -1,14 +1,11 @@
 import { ResponsiveContainer, LineChart, Line } from "recharts";
-import { cartesianGrid, xAxis, axis, tip, legend } from "../../constants";
+import StyledYAxis from "./chartElements/StyledYAxis";
+import StyledXAxis from "./chartElements/StyledXAxis";
+import StyledTooltip from "./chartElements/StyledTooltip";
+import StyledLegend from "./chartElements/StyledLegend";
+import { StyledCartesianGrid } from "../styles/Chart.styled";
 
 const WindChart = (props) => {
-  console.log(props.data);
-
-  const yAxis_speed = axis("Wind speed (km/h)", 80);
-  const yAxis_direction = axis("Wind direction (deg)", 80);
-  const tooltip_speed = tip("km/h");
-  const tooltip_direction = tip("°");
-
   return (
     <ResponsiveContainer width="95%">
       <div>
@@ -25,11 +22,11 @@ const WindChart = (props) => {
             stroke="#AFD6C6"
             strokeWidth={3}
           />
-          {cartesianGrid}
-          {xAxis}
-          {yAxis_speed}
-          {tooltip_speed}
-          {legend}
+          <StyledCartesianGrid strokeDasharray="5 5" />
+          {StyledXAxis(props.data[0].theme)}
+          {StyledYAxis(props.data[0].theme, "Wind speed (km/h)", 65)}
+          {StyledTooltip("km/h")}
+          {StyledLegend()}
         </LineChart>
         <LineChart width={900} height={200} data={props.data} syncId="1">
           <Line
@@ -38,11 +35,11 @@ const WindChart = (props) => {
             stroke="#94D8F0"
             strokeWidth={3}
           />
-          {cartesianGrid}
-          {xAxis}
-          {yAxis_direction}
-          {tooltip_direction}
-          {legend}
+          <StyledCartesianGrid strokeDasharray="5 5" />
+          {StyledXAxis(props.data[0].theme)}
+          {StyledYAxis(props.data[0].theme, "Wind direction (deg)", 65)}
+          {StyledTooltip("°")}
+          {StyledLegend()}
         </LineChart>
       </div>
     </ResponsiveContainer>

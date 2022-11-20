@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
-export const ErrorModalContainer = styled.div`
+export const StyledErrorModal = styled.div`
   font-size: 3rem;
   text-align: center;
   position: fixed;
@@ -30,14 +30,14 @@ export const ErrorModalContainer = styled.div`
   }
 `;
 
-export const ReloadLink = styled(Link)`
+export const StyledReloadLink = styled(Link)`
   display: inline-block;
   padding: 1rem 3rem;
   text-decoration: none;
   color: inherit;
-  border: 3px solid #fff;
+  border: 3px solid ${({ theme }) => theme.colors.white};
   border-radius: 10px;
-  transition: all 0.2s;
+  transition: ${({ theme }) => theme.transition.all};
 
   &:hover {
     background-color: #3a4756;

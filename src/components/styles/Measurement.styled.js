@@ -1,20 +1,14 @@
 import styled from "styled-components";
 
 export const MeasureContainer = styled.div`
-  background-image: var(--background-gradient);
-  border-radius: var(--border-radius--big);
+  background-image: ${({ theme }) => theme.background.gradient};
+  border-radius: ${({ theme }) => theme.border.bigRadius};
   padding: 2rem 3rem;
   font-size: 2rem;
 
   display: flex;
   justify-content: space-between;
   gap: 3rem;
-
-  /* p {
-    // align-self: center;
-    margin-top: 4rem;
-    margin-left: 10rem;
-  } */
 
   div label {
     display: inline-block;
@@ -23,13 +17,13 @@ export const MeasureContainer = styled.div`
 
   div select {
     padding: 1rem 2rem;
-    border: 2px solid var(--color-white);
-    border-radius: var(--border-radius--small);
+    border: 2px solid ${({ theme }) => theme.colors.white};
+    border-radius: ${({ theme }) => theme.border.smallRadius};
     outline: none;
     color: inherit;
     font: inherit;
-    background-color: var(--color-dark);
-    transition: var(--transition-all);
+    background-color: ${({ theme }) => theme.colors.dark};
+    transition: ${({ theme }) => theme.transition.all};
 
     &:focus {
       background-color: #474747;

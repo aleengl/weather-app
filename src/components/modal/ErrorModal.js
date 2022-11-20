@@ -1,6 +1,9 @@
 import { Fragment } from "react";
 import ReactDOM from "react-dom";
-import { ErrorModalContainer, ReloadLink } from "../styles/ErrorModal.styled";
+import {
+  StyledErrorModal,
+  StyledReloadLink,
+} from "../styles/ErrorModal.styled";
 import { useHistory } from "react-router-dom";
 
 const ErrorModal = (props) => {
@@ -15,14 +18,14 @@ const ErrorModal = (props) => {
   return (
     <Fragment>
       {ReactDOM.createPortal(
-        <ErrorModalContainer>
+        <StyledErrorModal>
           <div>
             <h1>{props.error}</h1>
-            <ReloadLink to="/" onClick={() => changeLocation("/")}>
+            <StyledReloadLink to="/" onClick={() => changeLocation("/")}>
               Reload the page
-            </ReloadLink>
+            </StyledReloadLink>
           </div>
-        </ErrorModalContainer>,
+        </StyledErrorModal>,
         document.getElementById("error-modal")
       )}
     </Fragment>

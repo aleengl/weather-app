@@ -37,7 +37,7 @@ const LoadingWrapper = styled.div`
         width: 8px;
         height: 8px;
         border-radius: 50%;
-        background: #fff;
+        background: ${({ theme }) => theme.colors.white};
         margin: -4px 0 0 -4px;
       }
 

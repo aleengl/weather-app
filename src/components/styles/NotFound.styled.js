@@ -35,9 +35,9 @@ export const RetryLink = styled(Link)`
   padding: 1rem 3rem;
   text-decoration: none;
   color: inherit;
-  border: 3px solid #fff;
+  border: 3px solid ${({ theme }) => theme.color.white};
   border-radius: 10px;
-  transition: all 0.2s;
+  transition: ${({ theme }) => theme.transition.all};
 
   &:hover {
     background-color: #3a4756;

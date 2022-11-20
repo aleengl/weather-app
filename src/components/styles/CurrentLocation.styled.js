@@ -1,9 +1,9 @@
 import styled from "styled-components";
 
-const LocationContainer = styled.div`
+const StyledLocation = styled.div`
   padding: 2rem;
-  background-image: var(--background-gradient);
-  border-radius: var(--border-radius--big);
+  background-image: ${({ theme }) => theme.background.gradient};
+  border-radius: ${({ theme }) => theme.border.bigRadius};
   font-size: 2.5rem;
 
   p:first-child {
@@ -17,10 +17,10 @@ const LocationContainer = styled.div`
     cursor: pointer;
     padding: 1rem 1.3rem;
     font-size: 2rem;
-    border-radius: var(--border-radius--small);
-    border: var(--border-white);
-    background-color: var(--color-dark);
-    transition: var(--transition-all);
+    border-radius: ${({ theme }) => theme.border.smallRadius};
+    border: ${({ theme }) => theme.border.whiteBorder};
+    background-color: ${({ theme }) => theme.colors.dark};
+    transition: ${({ theme }) => theme.transition.all};
 
     &:hover,
     &:active {
@@ -29,4 +29,4 @@ const LocationContainer = styled.div`
   }
 `;
 
-export default LocationContainer;
+export default StyledLocation;

@@ -1,11 +1,11 @@
 import sprite_symbols from "../../img/sprite_symbols.svg";
-import { ConditionContainer } from "../styles/Condition.styled";
+import { StyledCondition } from "../styles/Condition.styled";
 import { style_cloudSun } from "../../constants";
 import Icon from "../Icon/Icon";
 
 const Condition = (props) => {
   return (
-    <ConditionContainer>
+    <StyledCondition>
       <div>
         {props.icon ? (
           <img
@@ -22,7 +22,7 @@ const Condition = (props) => {
       </div>
       <p>{props.temperature ? `${props.temperature.toFixed(1)}°C` : "15°C"}</p>
       <span>{props.description ? props.description : "sun"}</span>
-    </ConditionContainer>
+    </StyledCondition>
   );
 };
 

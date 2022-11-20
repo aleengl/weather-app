@@ -1,12 +1,11 @@
 import { ResponsiveContainer, LineChart, Line } from "recharts";
-import { cartesianGrid, xAxis, axis, tip, legend } from "../../constants";
+import StyledYAxis from "./chartElements/StyledYAxis";
+import StyledXAxis from "./chartElements/StyledXAxis";
+import StyledTooltip from "./chartElements/StyledTooltip";
+import StyledLegend from "./chartElements/StyledLegend";
+import { StyledCartesianGrid } from "../styles/Chart.styled";
 
 const TemperatureChart = (props) => {
-  console.log(props.data);
-
-  const yAxis = axis("Temperature (°C)", 65);
-  const tooltip = tip("°C");
-
   return (
     <ResponsiveContainer width="95%">
       <LineChart width={1000} height={500} data={props.data}>
@@ -17,11 +16,11 @@ const TemperatureChart = (props) => {
           strokeWidth={3}
           stroke="#94D8F0"
         />
-        {cartesianGrid}
-        {xAxis}
-        {yAxis}
-        {tooltip}
-        {legend}
+        <StyledCartesianGrid strokeDasharray="5 5" />
+        {StyledXAxis(props.data[0].theme)}
+        {StyledYAxis(props.data[0].theme, "Temperature (°C)", 20)}
+        {StyledTooltip("°C")}
+        {StyledLegend()}
       </LineChart>
     </ResponsiveContainer>
   );

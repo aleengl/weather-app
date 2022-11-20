@@ -20,12 +20,12 @@ export const Container = styled.div`
     input,
     select {
       padding: 1rem 2rem;
-      border: 2px solid var(--color-white);
+      border: 2px solid ${({ theme }) => theme.color.white};
       border-radius: 10px;
       outline: none;
       color: inherit;
       font: inherit;
-      background-color: #333333;
+      background-color: ${({ theme }) => theme.color.dark};
       font-size: 1.7rem;
       transition: all 0.4s;
 
@@ -35,14 +35,14 @@ export const Container = styled.div`
     }
 
     button {
-      background-color: #333333;
+      background-color: ${({ theme }) => theme.color.dark};
       color: inherit;
       padding: 0.8rem 0;
       font-size: 1.8rem;
-      border: 1px solid var(--color-white);
+      border: 1px solid ${({ theme }) => theme.color.white};
       border-radius: 5px;
       cursor: pointer;
-      transition: all 0.2s;
+      transition: ${({ theme }) => theme.transition.all};
 
       &:hover {
         background-color: #474747;

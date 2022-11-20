@@ -1,4 +1,4 @@
-import LocationContainer from "../styles/CurrentLocation.styled";
+import StyledLocation from "../styles/CurrentLocation.styled";
 import Condition from "./Condition";
 import Station from "./Station";
 import Modal from "../modal/Modal";
@@ -28,8 +28,6 @@ const CurrentLocation = (props) => {
   const history = useHistory();
   const match = useRouteMatch();
 
-  console.log(props.forecastData.timezone, props.forecastData.firstTimestamp);
-
   const showModalHandler = () => {
     history.push(`${match.path}/new-location`);
   };
@@ -40,7 +38,7 @@ const CurrentLocation = (props) => {
   );
 
   return (
-    <LocationContainer>
+    <StyledLocation>
       <Route path={`${match.path}/new-location`}>
         <Modal />
       </Route>
@@ -56,7 +54,7 @@ const CurrentLocation = (props) => {
           Choose a new Location
         </button>
       </div>
-    </LocationContainer>
+    </StyledLocation>
   );
 };
 
