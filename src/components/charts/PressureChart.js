@@ -22,8 +22,8 @@ const PressureChart = (props) => {
           stroke="#d0e1c2"
         />
         <StyledCartesianGrid strokeDasharray="5 5" />
-        {StyledXAxis(props.data[0].theme)}
-        {StyledYAxis(props.data[0].theme, "Pressure (hPa)", 65)}
+        {StyledXAxis(props.theme)}
+        {StyledYAxis(props.theme, "Pressure (hPa)", 55)}
         {StyledTooltip("hPa")}
         {StyledLegend()}
       </LineChart>

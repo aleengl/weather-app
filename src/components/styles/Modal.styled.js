@@ -1,11 +1,13 @@
 import styled from "styled-components";
 
 export const Backdrop = styled.div`
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  ${({ theme }) => `
+  position: ${theme.position.fixed};
+  top: ${theme.position.distanceFromBorder};
+  left: ${theme.position.distanceFromBorder};
+  right: ${theme.position.distanceFromBorder};
+  bottom: ${theme.position.distanceFromBorder};
+  `}
   background-color: rgba(0, 0, 0, 0.8);
   z-index: 10;
 `;
@@ -13,18 +15,20 @@ export const Backdrop = styled.div`
 export const ModalContainer = styled.div`
   padding: 3rem;
   font-size: 2rem;
-  background-image: ${({ theme }) => theme.background.gradient};
-  border-radius: ${({ theme }) => theme.border.bigRadius};
-  border: ${({ theme }) => theme.border.whiteBorder};
-  position: fixed;
+  ${({ theme }) => `
+  background-image: ${theme.background.gradient};
+  border-radius: ${theme.border.bigRadius};
+  border: ${theme.border.whiteBorder};
+  position: ${theme.position.fixed};
+  `}
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: ${({ theme }) => theme.transform};
   z-index: 9999;
 
   & > button:last-child {
-    position: absolute;
-    top: 1.5rem;
+    position: ${({ theme }) => theme.position.absolute};
+    top: 1.5rem; // change in %
     right: 1.5rem;
     border: none;
     background-color: transparent;
@@ -60,7 +64,7 @@ export const ModalContainer = styled.div`
       transition: ${({ theme }) => theme.transition.all};
 
       &:focus {
-        background-color: #474747;
+        background-color: ${({ theme }) => theme.colors.grey};
       }
     }
 
@@ -76,7 +80,7 @@ export const ModalContainer = styled.div`
 
       &:hover,
       &:active {
-        background-color: #474747;
+        background-color: ${({ theme }) => theme.colors.grey};
         color: inherit;
       }
     }

@@ -6,7 +6,7 @@ export const MeasureContainer = styled.div`
   padding: 2rem 3rem;
   font-size: 2rem;
 
-  display: flex;
+  display: ${({ theme }) => theme.display.flex};
   justify-content: space-between;
   gap: 3rem;
 
@@ -26,7 +26,7 @@ export const MeasureContainer = styled.div`
     transition: ${({ theme }) => theme.transition.all};
 
     &:focus {
-      background-color: #474747;
+      background-color: ${({ theme }) => theme.colors.grey};
     }
   }
 `;

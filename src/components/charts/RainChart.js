@@ -10,8 +10,8 @@ const RainChart = (props) => {
     <ResponsiveContainer width="95%">
       <BarChart height={1000} width={500} data={props.data}>
         <StyledCartesianGrid strokeDasharray="5 5" />
-        {StyledXAxis(props.data[0].theme)}
-        {StyledYAxis(props.data[0].theme, "rain sum (mm)", 65)}
+        {StyledXAxis(props.theme)}
+        {StyledYAxis(props.theme, "Rain sum (mm)", 55)}
         {StyledTooltip("mm")}
         {StyledLegend()}
         <Bar dataKey="rain" fill="#94D8F0">
@@ -19,7 +19,7 @@ const RainChart = (props) => {
             dataKey={props.data.rain}
             position="top"
             style={{
-              fill: props.data[0].theme.colors.white,
+              fill: props.theme.colors.white,
               fontSize: 17,
             }}
           />

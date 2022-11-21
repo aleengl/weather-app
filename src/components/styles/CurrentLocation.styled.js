@@ -24,7 +24,7 @@ const StyledLocation = styled.div`
 
     &:hover,
     &:active {
-      background-color: #474747;
+      background-color: ${({ theme }) => theme.colors.grey};
     }
   }
 `;

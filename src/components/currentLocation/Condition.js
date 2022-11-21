@@ -1,7 +1,6 @@
 import sprite_symbols from "../../img/sprite_symbols.svg";
 import { StyledCondition } from "../styles/Condition.styled";
-import { style_cloudSun } from "../../constants";
-import Icon from "../Icon/Icon";
+import { StyleCloudSun } from "../styles/Icon.styled";
 
 const Condition = (props) => {
   return (
@@ -13,11 +12,9 @@ const Condition = (props) => {
             alt="icon of the weather condition"
           />
         ) : (
-          <Icon
-            file={sprite_symbols}
-            icon="icon-cloud-sun"
-            style={style_cloudSun}
-          />
+          <StyleCloudSun>
+            <use xlinkHref={`${sprite_symbols}#${"icon-cloud-sun"}`}></use>
+          </StyleCloudSun>
         )}
       </div>
       <p>{props.temperature ? `${props.temperature.toFixed(1)}°C` : "15°C"}</p>

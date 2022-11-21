@@ -23,8 +23,8 @@ const WindChart = (props) => {
             strokeWidth={3}
           />
           <StyledCartesianGrid strokeDasharray="5 5" />
-          {StyledXAxis(props.data[0].theme)}
-          {StyledYAxis(props.data[0].theme, "Wind speed (km/h)", 65)}
+          {StyledXAxis(props.theme)}
+          {StyledYAxis(props.theme, "Wind speed (km/h)", 80)}
           {StyledTooltip("km/h")}
           {StyledLegend()}
         </LineChart>
@@ -36,8 +36,8 @@ const WindChart = (props) => {
             strokeWidth={3}
           />
           <StyledCartesianGrid strokeDasharray="5 5" />
-          {StyledXAxis(props.data[0].theme)}
-          {StyledYAxis(props.data[0].theme, "Wind direction (deg)", 65)}
+          {StyledXAxis(props.theme)}
+          {StyledYAxis(props.theme, "Wind direction (deg)", 80)}
           {StyledTooltip("°")}
           {StyledLegend()}
         </LineChart>

@@ -4,7 +4,7 @@ export const Container = styled.div`
   margin-top: 1rem;
 
   & > * {
-    display: flex;
+    display: ${({ theme }) => theme.display.flex};
     align-items: center;
     gap: 1rem;
   }

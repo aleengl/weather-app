@@ -19,12 +19,7 @@ const HumidityChart = React.lazy(() => import("../charts/HumidityChart"));
 const RainChart = React.lazy(() => import("../charts/RainChart"));
 const WindChart = React.lazy(() => import("../charts/WindChart"));
 
-const getChartParameterForecastData = (
-  timestamps,
-  timezone,
-  parameter,
-  theme
-) => {
+const getChartParameterForecastData = (timestamps, timezone, parameter) => {
   if (timestamps && timezone) {
     return timestamps.map((obj) => {
       const date = new Date(obj["dt_txt"]);
@@ -35,7 +30,6 @@ const getChartParameterForecastData = (
         minute: "numeric",
       });
       return {
-        theme: theme,
         time: time,
         ...(parameter === "temperature" && {
           temp: parseFloat(obj.main.temp.toFixed(1)),
@@ -69,53 +63,37 @@ const renderChart = (timestamps, timezone, str, theme) => {
           data={getChartParameterForecastData(
             timestamps,
             timezone,
-            "temperature",
-            theme
+            "temperature"
           )}
+          theme={theme}
         />
       );
     case "pressure":
       return (
         <PressureChart
-          data={getChartParameterForecastData(
-            timestamps,
-            timezone,
-            "pressure",
-            theme
-          )}
+          data={getChartParameterForecastData(timestamps, timezone, "pressure")}
+          theme={theme}
         />
       );
     case "wind":
       return (
         <WindChart
-          data={getChartParameterForecastData(
-            timestamps,
-            timezone,
-            "wind",
-            theme
-          )}
+          data={getChartParameterForecastData(timestamps, timezone, "wind")}
+          theme={theme}
         />
       );
     case "humidity":
       return (
         <HumidityChart
-          data={getChartParameterForecastData(
-            timestamps,
-            timezone,
-            "humidity",
-            theme
-          )}
+          data={getChartParameterForecastData(timestamps, timezone, "humidity")}
+          theme={theme}
         />
       );
     case "rain":
       return (
         <RainChart
-          data={getChartParameterForecastData(
-            timestamps,
-            timezone,
-            "rain",
-            theme
-          )}
+          data={getChartParameterForecastData(timestamps, timezone, "rain")}
+          theme={theme}
         />
       );
     default:

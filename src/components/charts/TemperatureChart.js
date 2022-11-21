@@ -17,8 +17,8 @@ const TemperatureChart = (props) => {
           stroke="#94D8F0"
         />
         <StyledCartesianGrid strokeDasharray="5 5" />
-        {StyledXAxis(props.data[0].theme)}
-        {StyledYAxis(props.data[0].theme, "Temperature (°C)", 20)}
+        {StyledXAxis(props.theme)}
+        {StyledYAxis(props.theme, "Temperature (°C)", 65)}
         {StyledTooltip("°C")}
         {StyledLegend()}
       </LineChart>

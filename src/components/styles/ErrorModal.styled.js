@@ -4,19 +4,21 @@ import styled from "styled-components";
 export const StyledErrorModal = styled.div`
   font-size: 3rem;
   text-align: center;
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  ${({ theme }) => `
+  position: ${theme.position.fixed};
+  top: ${theme.position.distanceFromBorder};
+  left: ${theme.position.distanceFromBorder};
+  right: ${theme.position.distanceFromBorder};
+  bottom: ${theme.position.distanceFromBorder};
+  `}
   background-image: linear-gradient(#0c0e10, #364e68);
   z-index: 99;
 
   div {
-    position: absolute;
+    position: ${({ theme }) => theme.position.absolute};
     top: 40%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: ${({ theme }) => theme.transform};
 
     h1 {
       text-shadow: 0 0 1rem #fefefe;

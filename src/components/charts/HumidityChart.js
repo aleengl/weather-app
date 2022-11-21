@@ -16,8 +16,8 @@ const HumidityChart = (props) => {
           </linearGradient>
         </defs>
         <StyledCartesianGrid strokeDasharray="5 5" />
-        {StyledXAxis(props.data[0].theme)}
-        {StyledYAxis(props.data[0].theme, "Humidity (%)", 65)}
+        {StyledXAxis(props.theme)}
+        {StyledYAxis(props.theme, "Humidity (%)", 50)}
         {StyledTooltip("%")}
         {StyledLegend()}
         <Area

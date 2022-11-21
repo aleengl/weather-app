@@ -10,7 +10,6 @@ import {
 } from "react-leaflet";
 import styled from "styled-components";
 import LocationIcon from "./LocationIcon";
-import { centeredMap, PopupContent } from "../../constants";
 
 const MyMap = styled(MapContainer)`
   height: 700px;
@@ -23,6 +22,16 @@ const LocationMarker = (props) => {
   if (props.location.lat) {
     map.flyTo(props.location, 16);
   }
+
+  const PopupContent = () => {
+    return (
+      <div>
+        <p>Name of the Station</p>
+        <p>Longitude</p>
+        <p>Latitude</p>
+      </div>
+    );
+  };
 
   return props.location.lat === null ? null : (
     <Marker position={props.location} icon={LocationIcon}>
@@ -39,7 +48,7 @@ const Map = (props) => {
   return (
     <Container>
       <MyMap
-        center={centeredMap}
+        center={[46.89, 11.43]} // coordinates of Sterzing to center the map to South Tyrol
         zoom={8}
         minZoom={4}
         scrollWheelZoom={false}

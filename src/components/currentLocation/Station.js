@@ -1,10 +1,9 @@
 import { Container } from "../styles/Station.styled";
-import Icon from "../Icon/Icon";
 import sprite_icons from "../../img/sprite_icons.svg";
-import { style_locationPin, style_calendar } from "../../constants";
 import useHttp from "../hooks/use-http";
 import { useEffect } from "react";
 import { API_URL_TIME, API_KEY_LOCATION } from "../../constants";
+import { StyleLocationPin, StyleCalendar } from "../styles/Icon.styled";
 
 const Station = (props) => {
   const { errorMessage, sendRequest: fetchTime, time } = useHttp();
@@ -25,15 +24,15 @@ const Station = (props) => {
   return (
     <Container>
       <div>
-        <Icon
-          file={sprite_icons}
-          icon="icon-location-pin"
-          style={style_locationPin}
-        />
+        <StyleLocationPin>
+          <use xlinkHref={`${sprite_icons}#${"icon-location-pin"}`}></use>
+        </StyleLocationPin>
         <span>{props.city}</span>
       </div>
       <div>
-        <Icon file={sprite_icons} icon="icon-calendar" style={style_calendar} />
+        <StyleCalendar>
+          <use xlinkHref={`${sprite_icons}#${"icon-calendar"}`}></use>
+        </StyleCalendar>
         {errorMessage ? (
           <p>{errorMessage}</p>
         ) : (

@@ -17,7 +17,7 @@ const StyledYAxis = (theme, parameter, shiftY) => {
         position: "insideLeft",
         fill: `${theme.colors.white}`,
         fontSize: "17px",
-        dy: `${shiftY}`,
+        dy: shiftY,
       }}
       allowDecimals={false}
     />

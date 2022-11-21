@@ -10,6 +10,7 @@ const theme = {
   colors: {
     white: "#fff",
     dark: "#333333",
+    grey: "#474747",
     black: "#000",
   },
   background: {
@@ -24,6 +25,15 @@ const theme = {
   transition: {
     all: "all .2s",
   },
+  display: {
+    flex: "flex",
+  },
+  position: {
+    absolute: "absolute",
+    fixed: "fixed",
+    distanceFromBorder: "0",
+  },
+  transform: "translate(-50%, -50%)",
 };
 
 const filterWeatherData = (weatherData, isPlotted = true) => {
@@ -111,14 +121,7 @@ const App = () => {
 
 export default App;
 
-// TODO: changes themes everywhere and delete :root in Global.js!!
-// TODO: yAxis label is not moving!!
-// TODO: All Charts components line 12 are breaking when refreshing => props.data[0].theme is undefined??? => maybe add fallback for all colors if undefined
-
-// TODO: put all styles of a component in one styled component
 // TODO: in CurrentLocation component show forecasted time differently
 // TODO: maybe try to improve accuracy with Geolocation API
 // TODO: show additional Data in Popup in Map component
 // TODO: implement search for a new location => use Geocoding API => already in use for getting the coordinates when user does not accept the geolocation
-
-// TODO: change styling of icons used => Condition component, Icon and Icon.styled, constants

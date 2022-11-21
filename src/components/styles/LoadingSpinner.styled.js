@@ -3,15 +3,17 @@ import styled from "styled-components";
 const LoadingWrapper = styled.div`
   position: ${(props) =>
     props.loadingMessage === "Chart is loading..." ? "absolute" : "fixed"};
-  display: flex;
+  display: ${({ theme }) => theme.display.flex};
   flex-direction: column;
   justify-content: center;
   align-items: center;
   gap: 2rem;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  top: 0;
+  ${({ theme }) => `
+  top: ${theme.position.distanceFromBorder};
+  left: ${theme.position.distanceFromBorder};
+  right: ${theme.position.distanceFromBorder};
+  bottom: ${theme.position.distanceFromBorder};
+  `}
   background-color: ${(props) =>
     props.loadingMessage === "Chart is loading..."
       ? "noone"
@@ -33,7 +35,7 @@ const LoadingWrapper = styled.div`
       &::after {
         content: " ";
         display: block;
-        position: absolute;
+        position: ${({ theme }) => theme.position.absolute};
         width: 8px;
         height: 8px;
         border-radius: 50%;

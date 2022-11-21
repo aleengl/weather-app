@@ -2,12 +2,12 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   form {
-    display: flex;
+    display: ${({ theme }) => theme.display.flex};
     flex-direction: column;
     gap: 2rem;
 
     div:first-child {
-      display: flex;
+      display: ${({ theme }) => theme.display.flex};
       align-items: center;
     }
 
@@ -30,7 +30,7 @@ export const Container = styled.div`
       transition: all 0.4s;
 
       &:focus {
-        background-color: #474747;
+        background-color: ${({ theme }) => theme.colors.grey};
       }
     }
 
@@ -45,7 +45,7 @@ export const Container = styled.div`
       transition: ${({ theme }) => theme.transition.all};
 
       &:hover {
-        background-color: #474747;
+        background-color: ${({ theme }) => theme.colors.grey};
       }
     }
   }
