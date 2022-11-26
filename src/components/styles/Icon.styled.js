@@ -14,3 +14,9 @@ export const StyleCloudSun = styled.svg`
   height: 10rem;
   width: 10rem;
 `;
+
+export const StyleMagnifyingGlass = styled.svg`
+  height: 3rem;
+  width: 3rem;
+  fill: ${({ theme }) => theme.colors.white};
+`;

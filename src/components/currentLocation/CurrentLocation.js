@@ -37,10 +37,14 @@ const CurrentLocation = (props) => {
     props.forecastData.firstTimestamp
   );
 
+  const getWeatherData = (searchInputdata) => {
+    props.weatherData(searchInputdata);
+  };
+
   return (
     <StyledLocation>
       <Route path={`${match.path}/new-location`}>
-        <Modal />
+        <Modal getData={getWeatherData} />
       </Route>
       <div>
         <p>Current Location ({time.time})</p>

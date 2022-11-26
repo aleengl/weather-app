@@ -17,14 +17,18 @@ const useHttp = () => {
 
   // need useCallback => memoize the function => otherwise after every re-render of the component we send a new request
   const sendRequest = useCallback(
-    async (url, type) => {
+    async (url, type, options) => {
       try {
-        const response = await fetch(url);
+        const response = await fetch(url, options);
 
         console.log(response);
 
         if (!response.ok && type === "weather") {
           throw new Error("Weather data not available!");
+        }
+
+        if (!response.ok && type === "city") {
+          throw new Error("City data not available!");
         }
 
         if (!response.ok && type === "coordinates") {
@@ -36,7 +40,6 @@ const useHttp = () => {
         }
 
         const data = await response.json();
-
         console.log(data);
 
         if (type === "coordinates") {
@@ -46,6 +49,18 @@ const useHttp = () => {
             lat: lat,
             lon: lon,
           });
+        }
+
+        if (type === "city") {
+          return {
+            options: data.data.map((city) => {
+              return {
+                lat: city.latitude,
+                lon: city.longitude,
+                label: `${city.name}, ${city.countryCode}`,
+              };
+            }),
+          };
         }
 
         if (type === "weather") {

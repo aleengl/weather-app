@@ -1,10 +1,12 @@
-import React, { Suspense } from "react";
+import React, { Suspense, useState } from "react";
 import { ThemeProvider } from "styled-components";
 import GlobalStyles from "./components/styles/Global";
 import StyledContainer from "./components/styles/Container.styled";
 import { StyledGrid } from "./components/styles/Grid.styled";
 import { Route, Switch } from "react-router-dom";
 import useGeolocation from "./components/hooks/use-geolocation";
+import useHttp from "./components/hooks/use-http";
+import { API_KEY_WEATHER, API_URL_FORECAST } from "./constants";
 
 const theme = {
   colors: {
@@ -76,13 +78,34 @@ const Measurement = React.lazy(() =>
 );
 const Map = React.lazy(() => import("./components/map/Map"));
 
+let plotWeatherData, forecastWeatherData;
+
 const App = () => {
-  // custom geolocation hook to not pollute the component
+  const {
+    sendRequest: fetchWeatherDataFromInput,
+    weatherData: weatherDataFromInput,
+  } = useHttp();
+
+  const [newPosition, setNewPosition] = useState();
+
   const { isLoading, message, errorMessage, weatherData, position } =
     useGeolocation();
 
-  const plotWeatherData = filterWeatherData(weatherData);
-  const forecastWeatherData = filterWeatherData(weatherData, false);
+  if (weatherDataFromInput.list.length !== 0) {
+    plotWeatherData = filterWeatherData(weatherDataFromInput);
+    forecastWeatherData = filterWeatherData(weatherDataFromInput, false);
+  } else {
+    plotWeatherData = filterWeatherData(weatherData);
+    forecastWeatherData = filterWeatherData(weatherData, false);
+  }
+
+  const getWeatherDataFromInput = (searchInputData) => {
+    fetchWeatherDataFromInput(
+      `${API_URL_FORECAST}${searchInputData.lat}&lon=${searchInputData.lon}&cnt=6&appid=${API_KEY_WEATHER}&units=metric`,
+      "weather"
+    );
+    setNewPosition({ lat: searchInputData.lat, lon: searchInputData.lon });
+  };
 
   return (
     <>
@@ -103,9 +126,12 @@ const App = () => {
             <Route path="/home">
               <StyledContainer>
                 <StyledGrid>
-                  <CurrentLocation forecastData={forecastWeatherData} />
+                  <CurrentLocation
+                    forecastData={forecastWeatherData}
+                    weatherData={getWeatherDataFromInput}
+                  />
                   <Measurement plotData={plotWeatherData} />
-                  <Map position={position} />
+                  <Map position={newPosition ? newPosition : position} />
                 </StyledGrid>
               </StyledContainer>
             </Route>
@@ -121,7 +147,8 @@ const App = () => {
 
 export default App;
 
+// TODO: refactor the code => write functions and put it outside of the component
+
 // TODO: in CurrentLocation component show forecasted time differently
 // TODO: maybe try to improve accuracy with Geolocation API
 // TODO: show additional Data in Popup in Map component
-// TODO: implement search for a new location => use Geocoding API => already in use for getting the coordinates when user does not accept the geolocation

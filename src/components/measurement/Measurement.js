@@ -20,7 +20,7 @@ const RainChart = React.lazy(() => import("../charts/RainChart"));
 const WindChart = React.lazy(() => import("../charts/WindChart"));
 
 const getChartParameterForecastData = (timestamps, timezone, parameter) => {
-  if (timestamps && timezone) {
+  if (timestamps && typeof timezone === "number") {
     return timestamps.map((obj) => {
       const date = new Date(obj["dt_txt"]);
       const timestampInMs = date.getTime();

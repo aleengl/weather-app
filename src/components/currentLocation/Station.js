@@ -17,9 +17,11 @@ const Station = (props) => {
     }
   }, [props.city, fetchTime]);
 
+  console.log(time);
+
   // optional chaining => only if time exists => read datetime property
   // otherwise undefined will be returned
-  const dateIndex = time?.datetime.indexOf(" ");
+  const dateIndex = time?.datetime && time?.datetime.indexOf(" ");
 
   return (
     <Container>
@@ -35,13 +37,15 @@ const Station = (props) => {
         </StyleCalendar>
         {errorMessage ? (
           <p>{errorMessage}</p>
-        ) : (
+        ) : time?.datetime ? (
           <p>
             {time?.datetime.substring(0, dateIndex)}
             <span>
               {time?.datetime.substring(dateIndex, time?.datetime.length - 3)}
             </span>
           </p>
+        ) : (
+          <p>N/A</p>
         )}
       </div>
     </Container>
