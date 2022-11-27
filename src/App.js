@@ -64,6 +64,14 @@ const filterWeatherData = (weatherData, isPlotted = true) => {
   };
 };
 
+const getLocationInformation = (weatherData) => {
+  if (weatherData.list.length !== 0) {
+    const { country, name, sunrise, sunset, timezone } = weatherData.city;
+
+    return { country, name, sunrise, sunset, timezone };
+  }
+};
+
 // lazy loading => import and download the components when needed => can improve the performance especially for large scale applications
 const LoadingSpinner = React.lazy(() =>
   import("./components/loadingSpinner/LoadingSpinner")
@@ -78,7 +86,7 @@ const Measurement = React.lazy(() =>
 );
 const Map = React.lazy(() => import("./components/map/Map"));
 
-let plotWeatherData, forecastWeatherData;
+let plotWeatherData, forecastWeatherData, locationDetails;
 
 const App = () => {
   const {
@@ -91,13 +99,20 @@ const App = () => {
   const { isLoading, message, errorMessage, weatherData, position } =
     useGeolocation();
 
+  console.log(weatherData);
+  console.log(weatherDataFromInput);
+
   if (weatherDataFromInput.list.length !== 0) {
     plotWeatherData = filterWeatherData(weatherDataFromInput);
     forecastWeatherData = filterWeatherData(weatherDataFromInput, false);
+    locationDetails = getLocationInformation(weatherDataFromInput);
   } else {
     plotWeatherData = filterWeatherData(weatherData);
     forecastWeatherData = filterWeatherData(weatherData, false);
+    locationDetails = getLocationInformation(weatherData);
   }
+
+  console.log(locationDetails);
 
   const getWeatherDataFromInput = (searchInputData) => {
     fetchWeatherDataFromInput(
@@ -131,7 +146,10 @@ const App = () => {
                     weatherData={getWeatherDataFromInput}
                   />
                   <Measurement plotData={plotWeatherData} />
-                  <Map position={newPosition ? newPosition : position} />
+                  <Map
+                    position={newPosition ? newPosition : position}
+                    details={locationDetails}
+                  />
                 </StyledGrid>
               </StyledContainer>
             </Route>
@@ -147,6 +165,7 @@ const App = () => {
 
 export default App;
 
+// TODO: use latitude and longitude from single source => otherwise map position sometimes not matching with Popup content and local time
 // TODO: refactor the code => write functions and put it outside of the component
 
 // TODO: in CurrentLocation component show forecasted time differently

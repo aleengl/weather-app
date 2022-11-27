@@ -24,11 +24,29 @@ const LocationMarker = (props) => {
   }
 
   const PopupContent = () => {
+    const getSunriseSunset = (unixTime) => {
+      const unixToMilliseconds = Math.floor(
+        (unixTime + props.details.timezone - 3600) * 1000 // if choosing city with UTC timezone => 3600 should not be subtracted
+      );
+
+      return new Date(unixToMilliseconds).toLocaleString("de-DE", {
+        hour: "numeric",
+        minute: "numeric",
+      });
+    };
     return (
       <div>
-        <p>Name of the Station</p>
-        <p>Longitude</p>
-        <p>Latitude</p>
+        <p>
+          Time: UTC{props.details.timezone >= 0 && "+"}
+          {props.details.timezone / 3600}
+        </p>
+        <p>
+          Location: {props.details.name}, {props.details.country}
+        </p>
+        <p>Latitude: {props.location.lat.toFixed(2)}°</p>
+        <p>Longitude: {props.location.lon.toFixed(2)}°</p>
+        <p>Sunrise: {getSunriseSunset(props.details.sunrise)}</p>
+        <p>Sunset: {getSunriseSunset(props.details.sunset)}</p>
       </div>
     );
   };
@@ -48,13 +66,13 @@ const Map = (props) => {
   return (
     <Container>
       <MyMap
-        center={[46.89, 11.43]} // coordinates of Sterzing to center the map to South Tyrol
+        center={[46.89, 11.43]} // coordinates of Sterzing to center the map
         zoom={8}
         minZoom={4}
         scrollWheelZoom={false}
         style={{ zIndex: 1 }}
       >
-        <LocationMarker location={props.position} />
+        <LocationMarker location={props.position} details={props.details} />
         <ScaleControl imperial={false} maxWidth={200} position="topright" />
         <LayersControl>
           <BaseLayer checked name="OpenStreetMap.HOT">

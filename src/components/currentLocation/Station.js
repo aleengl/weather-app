@@ -17,8 +17,6 @@ const Station = (props) => {
     }
   }, [props.city, fetchTime]);
 
-  console.log(time);
-
   // optional chaining => only if time exists => read datetime property
   // otherwise undefined will be returned
   const dateIndex = time?.datetime && time?.datetime.indexOf(" ");
