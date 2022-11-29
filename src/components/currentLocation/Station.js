@@ -11,11 +11,11 @@ const Station = (props) => {
   useEffect(() => {
     if (props.city) {
       fetchTime(
-        `${API_URL_TIME}${API_KEY_LOCATION}&location=${props.city}`,
+        `${API_URL_TIME}${API_KEY_LOCATION}&location=${props.city},${props.countryCode}`,
         "time"
       );
     }
-  }, [props.city, fetchTime]);
+  }, [props.city, fetchTime, props.countryCode]);
 
   // optional chaining => only if time exists => read datetime property
   // otherwise undefined will be returned

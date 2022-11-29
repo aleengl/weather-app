@@ -28,6 +28,8 @@ const CurrentLocation = (props) => {
   const history = useHistory();
   const match = useRouteMatch();
 
+  console.log(props.forecastData.weatherCode);
+
   const showModalHandler = () => {
     history.push(`${match.path}/new-location`);
   };
@@ -49,11 +51,16 @@ const CurrentLocation = (props) => {
       <div>
         <p>Current Location ({time.time})</p>
         <Condition
+          weatherCode={props.forecastData.weatherCode}
+          daytime={props.forecastData.daytime}
           icon={props.forecastData.icon}
           temperature={props.forecastData.temp}
           description={props.forecastData.description}
         />
-        <Station city={props.forecastData.cityName} />
+        <Station
+          city={props.forecastData.cityName}
+          countryCode={props.forecastData.countryCode}
+        />
         <button type="button" onClick={showModalHandler}>
           Choose a new Location
         </button>

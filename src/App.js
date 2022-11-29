@@ -49,16 +49,22 @@ const filterWeatherData = (weatherData, isPlotted = true) => {
   const firstTimestamp = weatherData.list[0];
 
   const icon = firstTimestamp?.weather[0].icon;
+  const weatherCode = firstTimestamp?.weather[0].id;
+  const daytime = firstTimestamp?.sys.pod;
   const temp = firstTimestamp?.main.temp;
   const description = firstTimestamp?.weather[0].description;
   const cityName = weatherData.city?.name;
   const timezone = weatherData.city?.timezone;
+  const countryCode = weatherData.city?.country;
 
   return {
     icon,
+    weatherCode,
+    daytime,
     temp,
     description,
     cityName,
+    countryCode,
     timezone,
     firstTimestamp,
   };
@@ -68,7 +74,21 @@ const getLocationInformation = (weatherData) => {
   if (weatherData.list.length !== 0) {
     const { country, name, sunrise, sunset, timezone } = weatherData.city;
 
-    return { country, name, sunrise, sunset, timezone };
+    const getSunriseSunset = (unixTime) => {
+      const unixToMilliseconds = Math.floor(
+        (unixTime + timezone - 3600) * 1000
+      );
+
+      return new Date(unixToMilliseconds).toLocaleString("de-DE", {
+        hour: "numeric",
+        minute: "numeric",
+      });
+    };
+
+    const sunriseHourMin = getSunriseSunset(sunrise);
+    const sunsetHourMin = getSunriseSunset(sunset);
+
+    return { country, name, sunriseHourMin, sunsetHourMin, timezone };
   }
 };
 
@@ -165,9 +185,5 @@ const App = () => {
 
 export default App;
 
-// TODO: use latitude and longitude from single source => otherwise map position sometimes not matching with Popup content and local time
-// TODO: refactor the code => write functions and put it outside of the component
-
-// TODO: in CurrentLocation component show forecasted time differently
-// TODO: maybe try to improve accuracy with Geolocation API
-// TODO: show additional Data in Popup in Map component
+// TODO: make responsive
+// TODO: look where animations could make sense

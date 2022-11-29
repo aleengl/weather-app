@@ -8,3 +8,5 @@ export const StyledGrid = styled.div`
   // align-items: start;
   gap: 5rem;
 `;
+
+// 1755px wind component is breaking, other components looking good

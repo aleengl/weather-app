@@ -3,14 +3,13 @@ import { StyledCondition } from "../styles/Condition.styled";
 import { StyleCloudSun } from "../styles/Icon.styled";
 
 const Condition = (props) => {
+  const iconClass = `owf owf-${props.weatherCode}-${props.daytime} owf-4x`;
+
   return (
     <StyledCondition>
       <div>
         {props.icon ? (
-          <img
-            src={`http://openweathermap.org/img/wn/${props.icon}@2x.png`}
-            alt="icon of the weather condition"
-          />
+          <i className={iconClass}></i>
         ) : (
           <StyleCloudSun>
             <use xlinkHref={`${sprite_symbols}#${"icon-cloud-sun"}`}></use>

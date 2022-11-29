@@ -1,64 +1,6 @@
-import { Container } from "../styles/Map.styled";
-import {
-  MapContainer,
-  TileLayer,
-  Marker,
-  Popup,
-  useMap,
-  ScaleControl,
-  LayersControl,
-} from "react-leaflet";
-import styled from "styled-components";
-import LocationIcon from "./LocationIcon";
-
-const MyMap = styled(MapContainer)`
-  height: 700px;
-  font-size: 1.5rem;
-`;
-
-const LocationMarker = (props) => {
-  const map = useMap();
-
-  if (props.location.lat) {
-    map.flyTo(props.location, 16);
-  }
-
-  const PopupContent = () => {
-    const getSunriseSunset = (unixTime) => {
-      const unixToMilliseconds = Math.floor(
-        (unixTime + props.details.timezone - 3600) * 1000 // if choosing city with UTC timezone => 3600 should not be subtracted
-      );
-
-      return new Date(unixToMilliseconds).toLocaleString("de-DE", {
-        hour: "numeric",
-        minute: "numeric",
-      });
-    };
-    return (
-      <div>
-        <p>
-          Time: UTC{props.details.timezone >= 0 && "+"}
-          {props.details.timezone / 3600}
-        </p>
-        <p>
-          Location: {props.details.name}, {props.details.country}
-        </p>
-        <p>Latitude: {props.location.lat.toFixed(2)}°</p>
-        <p>Longitude: {props.location.lon.toFixed(2)}°</p>
-        <p>Sunrise: {getSunriseSunset(props.details.sunrise)}</p>
-        <p>Sunset: {getSunriseSunset(props.details.sunset)}</p>
-      </div>
-    );
-  };
-
-  return props.location.lat === null ? null : (
-    <Marker position={props.location} icon={LocationIcon}>
-      <Popup>
-        <PopupContent />
-      </Popup>
-    </Marker>
-  );
-};
+import { Container, MyMap } from "../styles/Map.styled";
+import { TileLayer, ScaleControl, LayersControl } from "react-leaflet";
+import LocationMarker from "./LocationMarker";
 
 const { BaseLayer } = LayersControl;
 
