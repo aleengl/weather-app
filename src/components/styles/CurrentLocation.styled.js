@@ -6,6 +6,17 @@ const StyledLocation = styled.div`
   border-radius: ${({ theme }) => theme.border.bigRadius};
   font-size: 2.5rem;
 
+  @media (max-width: ${({ theme }) => theme.breakpoints.desktop}) {
+    // 1760px
+    justify-self: center;
+    width: 40rem;
+  }
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.tablet_portrait}) {
+    // 800px
+    width: 35rem;
+  }
+
   p:first-child {
     margin-bottom: 2rem;
   }

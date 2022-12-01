@@ -10,6 +10,13 @@ export const MeasureContainer = styled.div`
   justify-content: space-between;
   gap: 3rem;
 
+  @media (max-width: ${({ theme }) => theme.breakpoints.tablet_landscape[0]}) {
+    // 62.5em
+    // 1000px
+    flex-direction: column;
+    flex-flow: column-reverse;
+  }
+
   div label {
     display: inline-block;
     margin-bottom: 1rem;

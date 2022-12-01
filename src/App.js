@@ -36,6 +36,11 @@ const theme = {
     distanceFromBorder: "0",
   },
   transform: "translate(-50%, -50%)",
+  breakpoints: {
+    desktop: "110em", // 1760px
+    tablet_landscape: ["62.5em", "75em"], // 1000px, 1200px
+    tablet_portrait: "50em", // 800px
+  },
 };
 
 const filterWeatherData = (weatherData, isPlotted = true) => {
@@ -187,3 +192,6 @@ export default App;
 
 // TODO: make responsive
 // TODO: look where animations could make sense
+
+// TODO: Search and Search.styled can be deleted
+// TODO: make Loading Spinner and Modal windows responsive

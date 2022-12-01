@@ -7,8 +7,8 @@ import { StyledCartesianGrid } from "../styles/Chart.styled";
 
 const WindChart = (props) => {
   return (
-    <ResponsiveContainer width="95%">
-      <div>
+    <>
+      <ResponsiveContainer width="95%" height={220}>
         <LineChart width={900} height={200} data={props.data} syncId="1">
           <Line
             type="monotone"
@@ -25,9 +25,11 @@ const WindChart = (props) => {
           <StyledCartesianGrid strokeDasharray="5 5" />
           {StyledXAxis(props.theme)}
           {StyledYAxis(props.theme, "Wind speed (km/h)", 80)}
-          {StyledTooltip("km/h")}
+          {StyledTooltip("km/h", props.theme)}
           {StyledLegend()}
         </LineChart>
+      </ResponsiveContainer>
+      <ResponsiveContainer width="95%" height={220}>
         <LineChart width={900} height={200} data={props.data} syncId="1">
           <Line
             type="monotone"
@@ -38,11 +40,11 @@ const WindChart = (props) => {
           <StyledCartesianGrid strokeDasharray="5 5" />
           {StyledXAxis(props.theme)}
           {StyledYAxis(props.theme, "Wind direction (deg)", 80)}
-          {StyledTooltip("°")}
+          {StyledTooltip("°", props.theme)}
           {StyledLegend()}
         </LineChart>
-      </div>
-    </ResponsiveContainer>
+      </ResponsiveContainer>
+    </>
   );
 };
 

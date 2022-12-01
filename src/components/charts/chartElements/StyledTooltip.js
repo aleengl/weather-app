@@ -1,17 +1,17 @@
 import { Tooltip } from "recharts";
 
-const StyledTooltip = (unit) => {
+const StyledTooltip = (unit, theme) => {
   return (
     <Tooltip
       wrapperStyle={{
-        color: "#000",
+        color: `${theme.colors.black}`,
         outline: "none",
       }}
       contentStyle={{
-        fontSize: "15px",
+        fontSize: "12px",
       }}
       labelStyle={{ marginBottom: "10px" }}
-      itemStyle={{ color: "#000" }}
+      itemStyle={{ color: `${theme.colors.black}` }}
       formatter={(value) => `${value}${unit}`}
     />
   );

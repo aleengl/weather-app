@@ -11,3 +11,12 @@ export const StyledCartesianGrid = styled(CartesianGrid)`
 `;
 // need to access the displayName so that using styled components is possible
 StyledCartesianGrid.displayName = CartesianGrid.displayName;
+
+export const StyledChartContainer = styled.div`
+  height: 40rem;
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.desktop}) {
+    // 1760px
+    height: 50rem;
+  }
+`;

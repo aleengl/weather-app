@@ -2,7 +2,7 @@ import { Legend } from "recharts";
 
 const StyledLegend = () => {
   const changeFontSizeLegend = (value) => (
-    <span style={{ fontSize: "17px" }}>{value}</span>
+    <span style={{ fontSize: "14px" }}>{value}</span>
   );
 
   return (
