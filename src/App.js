@@ -190,8 +190,6 @@ const App = () => {
 
 export default App;
 
-// TODO: make responsive
 // TODO: look where animations could make sense
-
-// TODO: Search and Search.styled can be deleted
-// TODO: make Loading Spinner and Modal windows responsive
+// TODO: search for bugs, make code improvements
+// TODO: write README file in Github

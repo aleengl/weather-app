@@ -14,7 +14,7 @@ const StyledLocation = styled.div`
 
   @media (max-width: ${({ theme }) => theme.breakpoints.tablet_portrait}) {
     // 800px
-    width: 35rem;
+    width: auto;
   }
 
   p:first-child {

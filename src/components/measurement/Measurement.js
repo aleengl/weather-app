@@ -12,6 +12,7 @@ import { useState } from "react";
 import LoadingSpinner from "../loadingSpinner/LoadingSpinner";
 import { useContext } from "react";
 import { ThemeContext } from "styled-components";
+import NotFound from "../notFound/NotFound";
 
 const TemperatureChart = React.lazy(() => import("../charts/TemperatureChart"));
 const PressureChart = React.lazy(() => import("../charts/PressureChart"));
@@ -136,7 +137,11 @@ const Measurement = (props) => {
             {options.map((str, index) => {
               const paraToLowerCase = str.toLowerCase();
               return (
-                <Route path={`${match.path}/${paraToLowerCase}`} key={index}>
+                <Route
+                  path={`${match.path}/${paraToLowerCase}`}
+                  key={index}
+                  exact
+                >
                   {renderChart(
                     timestamps,
                     timezone,
@@ -146,6 +151,12 @@ const Measurement = (props) => {
                 </Route>
               );
             })}
+            {location.pathname !== `${match.path}` &&
+              location.pathname !== `${match.path}/new-location` && (
+                <Route>
+                  <NotFound />
+                </Route>
+              )}
           </Switch>
         </Suspense>
       </StyledChart>

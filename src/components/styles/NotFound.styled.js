@@ -1,7 +1,6 @@
-import { Link } from "react-router-dom";
 import styled from "styled-components";
 
-export const NotFoundContainer = styled.div`
+export const StyledNotFound = styled.div`
   font-size: 3rem;
   text-align: center;
   ${({ theme }) => `
@@ -27,21 +26,7 @@ export const NotFoundContainer = styled.div`
     }
 
     p {
-      margin-bottom: 6rem;
+      margin-bottom: 1rem;
     }
-  }
-`;
-
-export const RetryLink = styled(Link)`
-  display: inline-block;
-  padding: 1rem 3rem;
-  text-decoration: none;
-  color: inherit;
-  border: 3px solid ${({ theme }) => theme.color.white};
-  border-radius: 10px;
-  transition: ${({ theme }) => theme.transition.all};
-
-  &:hover {
-    background-color: #3a4756;
   }
 `;

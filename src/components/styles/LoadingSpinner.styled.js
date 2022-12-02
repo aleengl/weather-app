@@ -22,33 +22,39 @@ const LoadingWrapper = styled.div`
     props.loadingMessage === "Chart is loading..." ? "1" : "10"};
   font-size: 2rem;
 
+  @media (max-width: ${({ theme }) => theme.breakpoints.desktop}) {
+    flex-direction: ${(props) =>
+      props.loadingMessage === "Chart is loading..." ? "row" : "column"};
+    text-align: center;
+  }
+
   & > div:first-child {
     display: inline-block;
     position: relative;
-    width: 80px;
-    height: 80px;
+    width: 8rem;
+    height: 8rem;
 
     & div {
       animation: lds-roller 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
-      transform-origin: 40px 40px;
+      transform-origin: 4rem 4rem;
 
       &::after {
         content: " ";
         display: block;
         position: ${({ theme }) => theme.position.absolute};
-        width: 8px;
-        height: 8px;
+        width: 0.8rem;
+        height: 0.8rem;
         border-radius: 50%;
         background: ${({ theme }) => theme.colors.white};
-        margin: -4px 0 0 -4px;
+        margin: -0.4rem 0 0 -0.4rem;
       }
 
       &:nth-child(1) {
         animation-delay: -0.036s;
 
         &::after {
-          top: 63px;
-          left: 63px;
+          top: 6.3rem;
+          left: 6.3rem;
         }
       }
 
@@ -56,8 +62,8 @@ const LoadingWrapper = styled.div`
         animation-delay: -0.072s;
 
         &::after {
-          top: 68px;
-          left: 56px;
+          top: 6.8rem;
+          left: 5.6rem;
         }
       }
 
@@ -65,8 +71,8 @@ const LoadingWrapper = styled.div`
         animation-delay: -0.108s;
 
         &::after {
-          top: 71px;
-          left: 48px;
+          top: 7.1rem;
+          left: 4.8rem;
         }
       }
 
@@ -74,8 +80,8 @@ const LoadingWrapper = styled.div`
         animation-delay: -0.144s;
 
         &::after {
-          top: 72px;
-          left: 40px;
+          top: 7.2rem;
+          left: 4rem;
         }
       }
 
@@ -83,8 +89,8 @@ const LoadingWrapper = styled.div`
         animation-delay: -0.18s;
 
         &::after {
-          top: 71px;
-          left: 32px;
+          top: 7.1rem;
+          left: 3.2rem;
         }
       }
 
@@ -92,8 +98,8 @@ const LoadingWrapper = styled.div`
         animation-delay: -0.216s;
 
         &::after {
-          top: 68px;
-          left: 24px;
+          top: 6.8rem;
+          left: 2.4rem;
         }
       }
 
@@ -101,8 +107,8 @@ const LoadingWrapper = styled.div`
         animation-delay: -0.252s;
 
         &::after {
-          top: 63px;
-          left: 17px;
+          top: 6.3rem;
+          left: 1.7rem;
         }
       }
 
@@ -110,8 +116,8 @@ const LoadingWrapper = styled.div`
         animation-delay: -0.288s;
 
         &::after {
-          top: 56px;
-          left: 12px;
+          top: 5.6rem;
+          left: 1.2rem;
         }
       }
       @keyframes lds-roller {

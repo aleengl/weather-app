@@ -16,7 +16,7 @@ export const StyledErrorModal = styled.div`
 
   div {
     position: ${({ theme }) => theme.position.absolute};
-    top: 40%;
+    top: 35%;
     left: 50%;
     transform: ${({ theme }) => theme.transform};
 

@@ -32,7 +32,7 @@ const modalVariants = {
     opacity: 0,
   },
   animate: {
-    top: "20%",
+    top: "10%",
     opacity: 1,
     transition: {
       ease: "easeIn",

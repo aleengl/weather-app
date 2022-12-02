@@ -9,9 +9,9 @@ import { useHistory } from "react-router-dom";
 const ErrorModal = (props) => {
   const history = useHistory();
 
-  const changeLocation = (location) => {
+  const changeLocation = (defaultPath) => {
     // first need to push to new path and then trigger page reload
-    history.push(location);
+    history.push(defaultPath);
     window.location.reload();
   };
 
