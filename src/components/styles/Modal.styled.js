@@ -18,7 +18,7 @@ export const ModalContainer = styled.div`
   ${({ theme }) => `
   position: ${theme.position.fixed};
   `}
-  top: 10%;
+  top: 20%;
   left: 50%;
   transform: ${({ theme }) => theme.transform};
   z-index: 9999;

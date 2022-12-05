@@ -49,7 +49,7 @@ const useGeolocation = () => {
         `${API_URL_LOCATION}Bolzano&limit=1&appid=${API_KEY_WEATHER}`,
         "coordinates"
       );
-      console.log("Geolocation denied!");
+      // console.log("Geolocation denied!");
       setIsLoading(false);
       history.push("/home");
     }, 5000);
@@ -72,7 +72,7 @@ const useGeolocation = () => {
           `${API_URL_LOCATION}Bolzano&limit=1&appid=${API_KEY_WEATHER}`,
           "coordinates"
         );
-        console.log("Geolocation not available!");
+        // console.log("Geolocation not available!");
         setIsLoading(false);
         history.push("/home");
       }, 5000);

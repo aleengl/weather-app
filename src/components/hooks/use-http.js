@@ -22,8 +22,6 @@ const useHttp = () => {
       try {
         const response = await fetch(url, options);
 
-        console.log(response);
-
         if (!response.ok && type === "weather") {
           throw new Error("Weather data not available!");
         }
@@ -41,7 +39,6 @@ const useHttp = () => {
         }
 
         const data = await response.json();
-        console.log(data);
 
         if (type === "coordinates") {
           const [locationData] = data;

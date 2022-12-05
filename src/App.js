@@ -133,9 +133,6 @@ const App = () => {
   const { isLoading, message, errorMessage, weatherData, position } =
     useGeolocation();
 
-  console.log(weatherData);
-  console.log(weatherDataFromInput);
-
   // not only need to filter the data from Geolocation but also from the AsyncPaginate input when the user searches for a new location
   if (weatherDataFromInput.list.length !== 0) {
     plotWeatherData = filterWeatherData(weatherDataFromInput);
@@ -146,8 +143,6 @@ const App = () => {
     forecastWeatherData = filterWeatherData(weatherData, false);
     locationDetails = getLocationInformation(weatherData);
   }
-
-  console.log(locationDetails);
 
   // function to uplift the data from the CurrentLocation component => define function where data is needed and pass the function as props to the component where the data is ready to be uplifted
   // in the function parameter get access to the data
@@ -177,7 +172,7 @@ const App = () => {
               {errorMessage ? (
                 <ErrorModal error={errorMessage} />
               ) : (
-                <LoadingSpinner message="Redirect to home..." />
+                <ErrorModal error="An error occurred!" />
               )}
             </Route>
             <Route path="/home">
@@ -208,5 +203,5 @@ const App = () => {
 
 export default App;
 
-// TODO: search for bugs, make code improvements
+// TODO: when no chart plotted => empty space should occupy whole place to prevent whitespace at the end without any background
 // TODO: write README file in Github

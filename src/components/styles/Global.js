@@ -18,6 +18,7 @@ const GlobalStyles = createGlobalStyle`
     // easier calculation when using rems => with rems can scale down layout easily => just need to reduce the font-size and properties where rem is used will scale down automatically 
     font-size: 62.5%; // 1rem = 10px
     box-sizing: border-box;
+    overflow-x: hidden;
 
     @media (max-width: ${({ theme }) => theme.breakpoints.tablet_landscape[1]}) 
       { // 1200px
@@ -31,8 +32,7 @@ const GlobalStyles = createGlobalStyle`
   }
 
   body {
-    height: 100%;
-    padding: 5rem 10rem;
+    padding: 10rem;
     background-image: ${({ theme }) => theme.background.gradient};
     background-repeat: no-repeat;
     font-family: "Roboto", sans-serif;

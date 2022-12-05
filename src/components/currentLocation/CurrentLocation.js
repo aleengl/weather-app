@@ -28,8 +28,6 @@ const CurrentLocation = (props) => {
   const history = useHistory();
   const match = useRouteMatch();
 
-  console.log(props.forecastData.weatherCode);
-
   const showModalHandler = () => {
     history.push(`${match.path}/new-location`);
   };
