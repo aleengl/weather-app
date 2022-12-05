@@ -3,6 +3,7 @@ import styled from "styled-components";
 export const StyledNotFound = styled.div`
   font-size: 3rem;
   text-align: center;
+  // can combine multiple arrow functions in once
   ${({ theme }) => `
   position: ${theme.position.fixed};
   top: ${theme.position.distanceFromBorder};

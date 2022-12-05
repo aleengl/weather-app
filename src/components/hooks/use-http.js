@@ -1,7 +1,7 @@
 import { useState, useCallback } from "react";
 import { useHistory } from "react-router-dom";
 
-// custom reusable Hook to fetch data
+// custom reusable hook to fetch data => can use React hooks there in addition to "regular" components
 const useHttp = () => {
   const [errorMessage, setErrorMessage] = useState();
   const [position, setPosition] = useState({
@@ -15,9 +15,10 @@ const useHttp = () => {
 
   const history = useHistory();
 
-  // need useCallback => memoize the function => otherwise after every re-render of the component we send a new request
+  // need useCallback => memoize the function => otherwise after every re-render we send a new request
   const sendRequest = useCallback(
     async (url, type, options) => {
+      // async arrow function to asynchronously fetch the data => not blocking the main thread
       try {
         const response = await fetch(url, options);
 

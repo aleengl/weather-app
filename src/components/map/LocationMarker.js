@@ -5,6 +5,7 @@ import { StyledPopup } from "../styles/Map.styled";
 const LocationMarker = (props) => {
   const map = useMap();
 
+  // move marker to latitude, longitude position
   if (props.location.lat) {
     map.flyTo(props.location, 16);
   }

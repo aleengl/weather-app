@@ -1,3 +1,4 @@
+// API keys and part of the URL for fetching the data
 export const API_KEY_WEATHER = "676cc917d4638f9dae16c8d712dea6be";
 export const API_KEY_LOCATION = "4840096b0b564aadaba0eec338d0543b";
 export const API_KEY_CITIES =

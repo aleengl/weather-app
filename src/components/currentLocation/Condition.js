@@ -3,6 +3,7 @@ import { StyledCondition } from "../styles/Condition.styled";
 import { StyleCloudSun } from "../styles/Icon.styled";
 
 const Condition = (props) => {
+  // Open Weather Map API icons are pngs where the color can not be changed and they get blurred when zooming => much better to use owfont (symbol font)
   const iconClass = `owf owf-${props.weatherCode}-${props.daytime} owf-4x`;
 
   return (

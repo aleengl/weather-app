@@ -32,6 +32,7 @@ export const StyledErrorModal = styled.div`
   }
 `;
 
+// style components from third party libraries => in this case from the react-router-dom package
 export const StyledReloadLink = styled(Link)`
   display: inline-block;
   padding: 1rem 3rem;

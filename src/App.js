@@ -8,6 +8,7 @@ import useGeolocation from "./components/hooks/use-geolocation";
 import useHttp from "./components/hooks/use-http";
 import { API_KEY_WEATHER, API_URL_FORECAST } from "./constants";
 
+// defined themes can be used inside of styled components but also outside in React components with ThemeContext
 const theme = {
   colors: {
     white: "#fff",
@@ -43,8 +44,10 @@ const theme = {
   },
 };
 
+// based on where where the data is used (plotted or not) extract necessary information and return it
 const filterWeatherData = (weatherData, isPlotted = true) => {
   if (isPlotted) {
+    // optional chaining(?.) => if undefined or null => return undefined instead of an error
     const timezone = weatherData.city?.timezone;
     const timestamps = weatherData.list.slice(1);
 
@@ -75,10 +78,13 @@ const filterWeatherData = (weatherData, isPlotted = true) => {
   };
 };
 
+// get the data to show it on the map in the Popup window
 const getLocationInformation = (weatherData) => {
   if (weatherData.list.length !== 0) {
     const { country, name, sunrise, sunset, timezone } = weatherData.city;
 
+    // sunrise and sunset given in unix time => seconds passed since unix epoch (1. January 1970, 00:00 UTC)
+    // convert it in a human readable format
     const getSunriseSunset = (unixTime) => {
       const unixToMilliseconds = Math.floor(
         (unixTime + timezone - 3600) * 1000
@@ -98,6 +104,7 @@ const getLocationInformation = (weatherData) => {
 };
 
 // lazy loading => import and download the components when needed => can improve the performance especially for large scale applications
+// for this application may not make a huge difference
 const LoadingSpinner = React.lazy(() =>
   import("./components/loadingSpinner/LoadingSpinner")
 );
@@ -114,6 +121,7 @@ const Map = React.lazy(() => import("./components/map/Map"));
 let plotWeatherData, forecastWeatherData, locationDetails;
 
 const App = () => {
+  // moved data fetching in separate custom reusable hook => outsource the logic and hold the App component clean
   const {
     sendRequest: fetchWeatherDataFromInput,
     weatherData: weatherDataFromInput,
@@ -121,12 +129,14 @@ const App = () => {
 
   const [newPosition, setNewPosition] = useState();
 
+  // same as with fetching data => this time for the Geolocation API
   const { isLoading, message, errorMessage, weatherData, position } =
     useGeolocation();
 
   console.log(weatherData);
   console.log(weatherDataFromInput);
 
+  // not only need to filter the data from Geolocation but also from the AsyncPaginate input when the user searches for a new location
   if (weatherDataFromInput.list.length !== 0) {
     plotWeatherData = filterWeatherData(weatherDataFromInput);
     forecastWeatherData = filterWeatherData(weatherDataFromInput, false);
@@ -139,6 +149,8 @@ const App = () => {
 
   console.log(locationDetails);
 
+  // function to uplift the data from the CurrentLocation component => define function where data is needed and pass the function as props to the component where the data is ready to be uplifted
+  // in the function parameter get access to the data
   const getWeatherDataFromInput = (searchInputData) => {
     fetchWeatherDataFromInput(
       `${API_URL_FORECAST}${searchInputData.lat}&lon=${searchInputData.lon}&cnt=6&appid=${API_KEY_WEATHER}&units=metric`,
@@ -150,10 +162,15 @@ const App = () => {
   return (
     <>
       <ThemeProvider theme={theme}>
+        {/* theme prop gives access to defined themes */}
         <GlobalStyles />
+        {/* used to define the global styles => e.g. resetting the margin and padding, defining the font, set box-sizing to border-box,... */}
         <Suspense fallback={<LoadingSpinner message="Loading..." />}>
+          {/* lazy loading => need fallback because components not ready immediately => have to be downloaded first */}
           <Switch>
+            {/* with Switch component we can be sure that only one Route will be active at a time */}
             <Route path="/" exact>
+              {/* exact prop => Route matches exactly the path and not only the beginning of the path => absolute path */}
               {isLoading && <LoadingSpinner message={message} />}
             </Route>
             <Route path="/home/error">
@@ -179,6 +196,7 @@ const App = () => {
               </StyledContainer>
             </Route>
             <Route path="*">
+              {/* the asterisk matches everything => it's like a fallback when none of the Routes defined matches */}
               <NotFound />
             </Route>
           </Switch>
@@ -190,6 +208,5 @@ const App = () => {
 
 export default App;
 
-// TODO: look where animations could make sense
 // TODO: search for bugs, make code improvements
 // TODO: write README file in Github

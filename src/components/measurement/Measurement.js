@@ -20,6 +20,7 @@ const HumidityChart = React.lazy(() => import("../charts/HumidityChart"));
 const RainChart = React.lazy(() => import("../charts/RainChart"));
 const WindChart = React.lazy(() => import("../charts/WindChart"));
 
+// conditionally spreading objects into the return object of the function
 const getChartParameterForecastData = (timestamps, timezone, parameter) => {
   if (timestamps && typeof timezone === "number") {
     return timestamps.map((obj) => {
@@ -56,6 +57,7 @@ const getChartParameterForecastData = (timestamps, timezone, parameter) => {
   return [];
 };
 
+// depending on the chart we render after get appropriate data and pass the theme to access it in the components
 const renderChart = (timestamps, timezone, str, theme) => {
   switch (str) {
     case "temperature":
@@ -134,6 +136,7 @@ const Measurement = (props) => {
       <StyledChart>
         <Suspense fallback={<LoadingSpinner message="Chart is loading..." />}>
           <Switch>
+            {/* may should not map and render the Routes like this => difficult to read */}
             {options.map((str, index) => {
               const paraToLowerCase = str.toLowerCase();
               return (
@@ -151,6 +154,7 @@ const Measurement = (props) => {
                 </Route>
               );
             })}
+            {/* Route components are normal components => can conditionally render them */}
             {location.pathname !== `${match.path}` &&
               location.pathname !== `${match.path}/new-location` && (
                 <Route>

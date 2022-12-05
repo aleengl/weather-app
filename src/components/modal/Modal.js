@@ -7,6 +7,7 @@ import useHttp from "../hooks/use-http";
 import { API_URL_CITIES, API_KEY_CITIES } from "../../constants";
 import { AsyncPaginate } from "react-select-async-paginate";
 
+// variants for the framer-motion library (animating React components) => enables to define animations outside of the component
 const backdropVariants = {
   hidden: {
     opacity: 0,
@@ -16,12 +17,6 @@ const backdropVariants = {
     transition: {
       type: "spring",
       duration: 1.5,
-    },
-  },
-  exit: {
-    opacity: 0,
-    transition: {
-      duration: 2,
     },
   },
 };
@@ -37,12 +32,6 @@ const modalVariants = {
     transition: {
       ease: "easeIn",
       duration: 1,
-    },
-  },
-  exit: {
-    top: "-20%",
-    transition: {
-      duration: 3,
     },
   },
 };
@@ -63,6 +52,8 @@ const Modal = (props) => {
     history.goBack();
   };
 
+  // show available city options
+  // when input is empty => show nothing
   const loadOptions = (inputValue) => {
     if (inputValue) {
       return sendRequest(
@@ -93,7 +84,6 @@ const Modal = (props) => {
             variants={backdropVariants}
             initial="hidden"
             animate="visible"
-            exit="exit"
           />
         </AnimatePresence>,
         document.getElementById("modal-backdrop")
@@ -105,7 +95,6 @@ const Modal = (props) => {
             variants={modalVariants}
             initial="initial"
             animate="animate"
-            exit="exit"
           >
             <AsyncPaginate
               placeholder="Select a city..."
@@ -123,3 +112,5 @@ const Modal = (props) => {
 };
 
 export default Modal;
+
+// AsyncPaginate allows to define a input field with several options based on the user input

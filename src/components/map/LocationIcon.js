@@ -9,3 +9,5 @@ const LocationIcon = new L.Icon({
 });
 
 export default LocationIcon;
+
+// use the geoapify API to get the marker

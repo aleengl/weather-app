@@ -21,3 +21,6 @@ const NotFound = () => {
 };
 
 export default NotFound;
+
+// Portals allow us to move a component in the real DOM tree to another position
+// => wrap the component into createPortal and define the target as the second argument

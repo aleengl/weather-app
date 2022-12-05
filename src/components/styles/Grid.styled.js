@@ -7,6 +7,6 @@ export const StyledGrid = styled.div`
 
   @media (max-width: ${({ theme }) => theme.breakpoints.desktop}) {
     // 1760px
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr; // could may also be doable without defining a breakpoint and work with auto-fit...
   }
 `;

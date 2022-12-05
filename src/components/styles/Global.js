@@ -2,6 +2,7 @@ import { createGlobalStyle } from "styled-components";
 
 const GlobalStyles = createGlobalStyle`
 
+// global reset of margin and padding => some elements have default margins and paddings => makes life easier
   * {
     margin: 0;
     padding: 0;
@@ -14,6 +15,7 @@ const GlobalStyles = createGlobalStyle`
   }
 
   html {
+    // easier calculation when using rems => with rems can scale down layout easily => just need to reduce the font-size and properties where rem is used will scale down automatically 
     font-size: 62.5%; // 1rem = 10px
     box-sizing: border-box;
 

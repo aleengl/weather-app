@@ -21,6 +21,7 @@ const useGeolocation = () => {
     weatherData,
   } = useHttp();
 
+  // again use useCallback to not render the success function again and again
   const success = useCallback(
     (position) => {
       const { latitude: lat, longitude: lon } = position.coords;
