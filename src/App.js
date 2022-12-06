@@ -203,5 +203,4 @@ const App = () => {
 
 export default App;
 
-// TODO: when no chart plotted => empty space should occupy whole place to prevent whitespace at the end without any background
 // TODO: write README file in Github

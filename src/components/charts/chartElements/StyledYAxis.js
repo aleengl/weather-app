@@ -20,6 +20,7 @@ const StyledYAxis = (theme, parameter, shiftY) => {
         dy: shiftY,
       }}
       allowDecimals={false}
+      tickCount={parameter === "Pressure (hPa)" ? 8 : 5}
     />
   );
 };

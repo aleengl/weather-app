@@ -8,7 +8,7 @@ const StyledLegend = () => {
   return (
     <Legend
       verticalAlign="top"
-      height={36}
+      height={55}
       iconSize={25}
       formatter={changeFontSizeLegend}
     />
