@@ -1,70 +1,50 @@
-# Getting Started with Create React App
+# Weather-Dashboard
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Small Weather-Dashboard created with React and styled components
 
-## Available Scripts
+## Get 3-hourly forecasts for every location in the world up to +15 hours
 
-In the project directory, you can run:
+![weather-dashboard](/src/img/weather-dashboard.png "Example for Lake Garda with temperature forecast")
 
-### `npm start`
+## Description
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+With this small application you get the forecast for typical weather parameters like temperature, wind, rain, pressure and humidity for places all over the world.
+The app shows the local time of the location together with the position on the map, updated when searching for a new location. You will also have access to further location information, e.g. sunrise and sunset. The weather data is plotted with different types of charts.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+I decided to use styled components because it gives the possibility to create components and attach styles to them. Additionally it's possible to define themes and use them everywhere in your app, not only inside of styled components but also inside of other components. Although there already exists React-Router version 6 and even 6.4.5 i used React-Router version 5. The reason for that is that the older codebases still use version 5 and primarily i wanted to improve my skills on that.
 
-### `npm test`
+## Third party libraries and APIs used to build this project
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- 3-hourly weather data ([OpenWeatherMap API](https://openweathermap.org/))
+- Local time ([Abstract API](https://www.abstractapi.com/))
+- Input options ([RapidAPI](https://rapidapi.com/wirefreethought/api/geodb-cities/))
+- Location icon ([Geoapify](https://www.geoapify.com/))
+- Symbol font for Open Weather Map API ([Owfont](https://websygen.github.io/owfont))
+- Map ([React Leaflet](https://react-leaflet.js.org/))
+- Animations ([Framer-motion](https://www.framer.com/docs/))
+- Search for new locations ([React-select-async-paginate](https://www.npmjs.com/package/react-select-async-paginate))
+- Plots ([Recharts](https://recharts.org/en-US/))
 
-### `npm run build`
+## Technologies
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- React (18.2.0)
+- Framer-motion (7.6.10)
+- React-Leaflet (4.1.0)
+- React-Router-DOM (5.3.4)
+- React-select-async-paginate (0.7.0)
+- Recharts (2.0.6)
+- Styled components (5.3.6)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Setup
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+To run this project, install it locally using npm:
 
-### `npm run eject`
+```
+$ cd <path to folder>
+$ npm install
+$ npm start
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### Inspiration
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Front-end design inspired by @MindInventory UI/UX - [dribbble](https://dribbble.com/shots/19207866-Weather-Forecast-Dashboard)
