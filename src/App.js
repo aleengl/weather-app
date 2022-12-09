@@ -204,4 +204,3 @@ const App = () => {
 export default App;
 
 // deploy with following command => npm run deploy
-// TODO: write README file in Github

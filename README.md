@@ -2,7 +2,7 @@
 
 Small Weather-Dashboard created with React and styled components
 
-## Get 3-hourly forecasts for every location in the world up to +15 hours
+## Get 3-hourly forecasts for every location in the world up to +12 hours
 
 ![weather-dashboard](/src/img/weather-dashboard.png "Example for Lake Garda with temperature forecast")
 
@@ -11,7 +11,7 @@ Small Weather-Dashboard created with React and styled components
 With this small application you get the forecast for typical weather parameters like temperature, wind, rain, pressure and humidity for places all over the world.
 The app shows the local time of the location together with the position on the map, updated when searching for a new location. You will also have access to further location information, e.g. sunrise and sunset. The weather data is plotted with different types of charts.
 
-I decided to use styled components because it gives the possibility to create components and attach styles to them. Additionally it's possible to define themes and use them everywhere in your app, not only inside of styled components but also inside of other components. Although there already exists React-Router version 6 and even 6.4.5 i used React-Router version 5. The reason for that is that the older codebases still use version 5 and primarily i wanted to improve my skills on that.
+I decided to use styled components because it gives the possibility to create components and attach styles to them. Additionally it's possible to define themes and use them everywhere in your app, not only inside of styled components but also inside of other components. Although there already exists React-Router v.6 and even v.6.4.5 i used React-Router v.5. The reason for that is that the "older" codebases still use v.5.
 
 ## Third party libraries and APIs used to build this project
 
