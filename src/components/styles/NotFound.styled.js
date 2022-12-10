@@ -29,5 +29,9 @@ export const StyledNotFound = styled.div`
     p {
       margin-bottom: 1rem;
     }
+
+    & > a:last-child {
+      margin-top: 4rem;
+    }
   }
 `;
